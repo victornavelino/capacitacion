@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ParticipacionViewDlg" widgetVar="ParticipacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewParticipacionTitle}">
+            <h:form id="ParticipacionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{participacionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewParticipacionLabel_id}"/>
+                        <h:outputText value="#{participacionController.selected.id}" title="#{bundle.ViewParticipacionTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewParticipacionLabel_capacitacion}"/>
+                        <h:outputText value="#{participacionController.selected.capacitacion}" title="#{bundle.ViewParticipacionTitle_capacitacion}"/>
+                        <h:outputText value="#{bundle.ViewParticipacionLabel_participante}"/>
+                        <h:outputText value="#{participacionController.selected.participante}" title="#{bundle.ViewParticipacionTitle_participante}"/>
+                        <h:outputText value="#{bundle.ViewParticipacionLabel_fechaInscripcion}"/>
+                        <h:outputText value="#{participacionController.selected.fechaInscripcion}" title="#{bundle.ViewParticipacionTitle_fechaInscripcion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewParticipacionLabel_fechaAsistencias}"/>
+                        <h:outputText value="#{participacionController.selected.fechaAsistencias}" title="#{bundle.ViewParticipacionTitle_fechaAsistencias}"/>
+                        <h:outputText value="#{bundle.ViewParticipacionLabel_resultado}"/>
+                        <h:outputText value="#{participacionController.selected.resultado}" title="#{bundle.ViewParticipacionTitle_resultado}"/>
+                        <h:outputText value="#{bundle.ViewParticipacionLabel_dependencia}"/>
+                        <h:outputText value="#{participacionController.selected.dependencia}" title="#{bundle.ViewParticipacionTitle_dependencia}"/>
+                        <h:outputText value="#{bundle.ViewParticipacionLabel_certificado}"/>
+                        <h:outputText value="#{participacionController.selected.certificado}" title="#{bundle.ViewParticipacionTitle_certificado}"/>
+                        <h:outputText value="#{bundle.ViewParticipacionLabel_cargo}"/>
+                        <h:outputText value="#{participacionController.selected.cargo}" title="#{bundle.ViewParticipacionTitle_cargo}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ParticipacionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CertificadoViewDlg" widgetVar="CertificadoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCertificadoTitle}">
+            <h:form id="CertificadoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{certificadoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCertificadoLabel_id}"/>
+                        <h:outputText value="#{certificadoController.selected.id}" title="#{bundle.ViewCertificadoTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCertificadoLabel_codigo}"/>
+                        <h:outputText value="#{certificadoController.selected.codigo}" title="#{bundle.ViewCertificadoTitle_codigo}"/>
+                        <h:outputText value="#{bundle.ViewCertificadoLabel_fechaGeneracion}"/>
+                        <h:outputText value="#{certificadoController.selected.fechaGeneracion}" title="#{bundle.ViewCertificadoTitle_fechaGeneracion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCertificadoLabel_participacion}"/>
+                        <h:outputText value="#{certificadoController.selected.participacion}" title="#{bundle.ViewCertificadoTitle_participacion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CertificadoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

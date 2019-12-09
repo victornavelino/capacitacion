@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CapacitacionCreateDlg" widgetVar="CapacitacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCapacitacionTitle}">
+            <h:form id="CapacitacionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{capacitacionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCapacitacionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{capacitacionController.selected.id}" title="#{bundle.CreateCapacitacionTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateCapacitacionLabel_titulo}" for="titulo" />
+                        <p:inputTextarea rows="4" cols="30" id="titulo" value="#{capacitacionController.selected.titulo}" title="#{bundle.CreateCapacitacionTitle_titulo}" />
+                        <p:outputLabel value="#{bundle.CreateCapacitacionLabel_anio}" for="anio" />
+                        <p:inputText id="anio" value="#{capacitacionController.selected.anio}" title="#{bundle.CreateCapacitacionTitle_anio}" />
+                        <p:outputLabel value="#{bundle.CreateCapacitacionLabel_fechas}" for="fechas" />
+                        <p:inputText id="fechas" value="#{capacitacionController.selected.fechas}" title="#{bundle.CreateCapacitacionTitle_fechas}" />
+                        <p:outputLabel value="#{bundle.CreateCapacitacionLabel_cantidadMinimaAsistencia}" for="cantidadMinimaAsistencia" />
+                        <p:inputText id="cantidadMinimaAsistencia" value="#{capacitacionController.selected.cantidadMinimaAsistencia}" title="#{bundle.CreateCapacitacionTitle_cantidadMinimaAsistencia}" />
+                        <p:outputLabel value="#{bundle.CreateCapacitacionLabel_cantidadHoras}" for="cantidadHoras" />
+                        <p:inputText id="cantidadHoras" value="#{capacitacionController.selected.cantidadHoras}" title="#{bundle.CreateCapacitacionTitle_cantidadHoras}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{capacitacionController.create}" value="#{bundle.Save}" update="display,:CapacitacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'CapacitacionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CapacitacionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

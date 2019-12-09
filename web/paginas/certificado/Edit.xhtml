@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CertificadoEditDlg" widgetVar="CertificadoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCertificadoTitle}">
+            <h:form id="CertificadoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{certificadoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditCertificadoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{certificadoController.selected.id}" title="#{bundle.EditCertificadoTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditCertificadoLabel_codigo}" for="codigo" />
+                        <p:inputText id="codigo" value="#{certificadoController.selected.codigo}" title="#{bundle.EditCertificadoTitle_codigo}" />
+                        <p:outputLabel value="#{bundle.EditCertificadoLabel_fechaGeneracion}" for="fechaGeneracion" />
+                        <p:calendar id="fechaGeneracion" pattern="MM/dd/yyyy" value="#{certificadoController.selected.fechaGeneracion}" title="#{bundle.EditCertificadoTitle_fechaGeneracion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditCertificadoLabel_participacion}" for="participacion" />
+                        <p:selectOneMenu id="participacion" value="#{certificadoController.selected.participacion}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{participacionController.itemsAvailableSelectOne}"
+                                           var="participacionItem"
+                                           itemValue="#{participacionItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{certificadoController.update}" value="#{bundle.Save}" update="display,:CertificadoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CertificadoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CertificadoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
