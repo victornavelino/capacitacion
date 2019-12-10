@@ -32,7 +32,6 @@ public class Capacitacion implements Serializable {
     @Lob
     private String titulo;
     private int anio;
-    //@Temporal(javax.persistence.TemporalType.)
     private List<Date> fechas;
     private int cantidadMinimaAsistencia;
     private int cantidadHoras;

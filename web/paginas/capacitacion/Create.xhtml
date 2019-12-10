@@ -8,29 +8,27 @@
 
     <ui:composition>
 
-        <p:dialog id="CapacitacionCreateDlg" widgetVar="CapacitacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCapacitacionTitle}">
+        <p:dialog id="CapacitacionCreateDlg" widgetVar="CapacitacionCreateDialog" modal="true" position="top" resizable="true" height="500" appendTo="@(body)" header="#{bundle.CreateCapacitacionTitle}">
             <h:form id="CapacitacionCreateForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{capacitacionController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateCapacitacionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{capacitacionController.selected.id}" title="#{bundle.CreateCapacitacionTitle_id}" />
+                <h:panelGroup id="display" >
+                    <p:panel id="pPri" header="Datos de la Capacitacion" >
+                   
+                    <p:panelGrid columns="2" rendered="#{capacitacionController.selected != null}" styleClass="noBorders">
                         <p:outputLabel value="#{bundle.CreateCapacitacionLabel_titulo}" for="titulo" />
-                        <p:inputTextarea rows="4" cols="30" id="titulo" value="#{capacitacionController.selected.titulo}" title="#{bundle.CreateCapacitacionTitle_titulo}" />
+                        <p:inputText id="titulo" value="#{capacitacionController.selected.titulo}" title="#{bundle.CreateCapacitacionTitle_titulo}" size="150" maxlength="300" />
                         <p:outputLabel value="#{bundle.CreateCapacitacionLabel_anio}" for="anio" />
                         <p:inputText id="anio" value="#{capacitacionController.selected.anio}" title="#{bundle.CreateCapacitacionTitle_anio}" />
-                        <p:outputLabel value="#{bundle.CreateCapacitacionLabel_fechas}"/>
-                        <p:dataList value="#{capacitacionController.selected.fechas}" var="fechasc" type="ordered" >
-                            <f:facet name="header">
-                                Fechas
-                            </f:facet>
-                        </p:dataList>
+                        <p:outputLabel for="multiselect" value="Seleccione Fechas de la Capacitacion:" />
+                        <p:datePicker id="multiselect" selectionMode="multiple" value="#{capacitacionController.selected.fechas}" pattern="dd/MM/yyyy" readonlyInput="true" size="150" maxlength="300"/>
                         <p:outputLabel value="#{bundle.CreateCapacitacionLabel_cantidadMinimaAsistencia}" for="cantidadMinimaAsistencia" />
                         <p:inputText id="cantidadMinimaAsistencia" value="#{capacitacionController.selected.cantidadMinimaAsistencia}" title="#{bundle.CreateCapacitacionTitle_cantidadMinimaAsistencia}" />
+                        
                         <p:outputLabel value="#{bundle.CreateCapacitacionLabel_cantidadHoras}" for="cantidadHoras" />
                         <p:inputText id="cantidadHoras" value="#{capacitacionController.selected.cantidadHoras}" title="#{bundle.CreateCapacitacionTitle_cantidadHoras}" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{capacitacionController.create}" value="#{bundle.Save}" update="display,:CapacitacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'CapacitacionCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="CapacitacionCreateDialog.hide()"/>
+                </p:panel>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
