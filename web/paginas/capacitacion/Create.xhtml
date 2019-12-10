@@ -18,8 +18,12 @@
                         <p:inputTextarea rows="4" cols="30" id="titulo" value="#{capacitacionController.selected.titulo}" title="#{bundle.CreateCapacitacionTitle_titulo}" />
                         <p:outputLabel value="#{bundle.CreateCapacitacionLabel_anio}" for="anio" />
                         <p:inputText id="anio" value="#{capacitacionController.selected.anio}" title="#{bundle.CreateCapacitacionTitle_anio}" />
-                        <p:outputLabel value="#{bundle.CreateCapacitacionLabel_fechas}" for="fechas" />
-                        <p:inputText id="fechas" value="#{capacitacionController.selected.fechas}" title="#{bundle.CreateCapacitacionTitle_fechas}" />
+                        <p:outputLabel value="#{bundle.CreateCapacitacionLabel_fechas}"/>
+                        <p:dataList value="#{capacitacionController.selected.fechas}" var="fechasc" type="ordered" >
+                            <f:facet name="header">
+                                Fechas
+                            </f:facet>
+                        </p:dataList>
                         <p:outputLabel value="#{bundle.CreateCapacitacionLabel_cantidadMinimaAsistencia}" for="cantidadMinimaAsistencia" />
                         <p:inputText id="cantidadMinimaAsistencia" value="#{capacitacionController.selected.cantidadMinimaAsistencia}" title="#{bundle.CreateCapacitacionTitle_cantidadMinimaAsistencia}" />
                         <p:outputLabel value="#{bundle.CreateCapacitacionLabel_cantidadHoras}" for="cantidadHoras" />
