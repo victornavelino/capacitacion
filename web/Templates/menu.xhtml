@@ -10,13 +10,13 @@
     <ui:composition>
 
 
-        <b:navBar static="true" brandAlign="left" brand=" Colegio de Médicos de Catamarca " brandHref="#{request.contextPath}/index.xhtml"  brandImg="#{request.contextPath}/Imagenes/logochico.png" >
+        <b:navBar static="true" brandAlign="left" brand=" Direccion de Capacitacion" brandHref="#{request.contextPath}/index.xhtml"  brandImg="#{request.contextPath}/Imagenes/logoUnca.png" >
 
             <br/><br/><br/><br/>
             <b:navbarLinks>
 
 
-                <b:navLink value="Medicos" iconAwesome="fa fa-user-md" href="/paginas/medico/List.xhtml"></b:navLink>
+                <b:navLink value="Capacitaciones" href="/paginas/capacitacion/List.xhtml"></b:navLink>
                 <b:navLink value="Especializaciones" iconAwesome="mortar-board" href="/paginas/especializacion/List.xhtml"></b:navLink>
                 <b:navLink value="Recertificaciones" iconAwesome="fa fa-plus-square" href="/paginas/recertificacion/List.xhtml"></b:navLink>
 
@@ -34,26 +34,6 @@
 
                 </b:dropMenu> 
                 <b:navLink value="Aranceles" iconAwesome="fa fa-usd" href="/paginas/aranceles/arancel.xhtml"></b:navLink>
-
-                <b:dropMenu value="Caja">
-
-                    <p:commandButton value="Abrir Caja" icon="ui-icon-folder-open" 
-                                     update=":frmPri:CajaAbreForm,growl" actionListener="#{cajaController.abrirCaja()}" ajax="false"></p:commandButton>
-                    <b:navLink  />
-                    <b:navLink value="Cajas" iconAwesome="fa fa-book" href="/paginas/caja/List.xhtml"></b:navLink>
-                    <b:navLink value="Movimientos" iconAwesome="fa fa-bars" href="/paginas/movimientoCaja/List.xhtml"></b:navLink>
-                    <b:navLink  />
-                    <b:navLink value="Tipos de Egreso" iconAwesome="fa fa-sign-out"  href="/paginas/tipoDeEgreso/List.xhtml"></b:navLink>
-                    <b:navLink value="Tipos de Ingreso" iconAwesome="fa fa-sign-in"  href="/paginas/tipoDeIngreso/List.xhtml"></b:navLink>
-                    <b:navLink  />
-                    <p:commandButton value="Cerrar Caja" update=":frmPri:CajaEditForm,growl" icon="ui-icon-circle-close" actionListener="#{cajaController.calcularSaldo()}"></p:commandButton>
-                </b:dropMenu>
-                <b:dropMenu value="Estado de Deuda">
-                    <b:navLink value="Dentro de los 6 Meses"  href="/consulta.xhtml?tipo=1"></b:navLink>
-                    <b:navLink value="De 6 a 12 Meses"  href="/consulta.xhtml?tipo=2"></b:navLink>
-                    <b:navLink value="De 12 a 24 Meses"  href="/consulta.xhtml?tipo=3"></b:navLink>
-                    <b:navLink value="Más de 24 Meses"  href="/consulta.xhtml?tipo=4"></b:navLink>
-                </b:dropMenu>
                 <b:dropMenu value="Reportes">
                     <b:navLink value="Especializaciones" iconAwesome="mortar-board" href="/paginas/especializacion/Grafico.xhtml"></b:navLink>
                     <b:navLink value="Recertificaciones Vigentes" iconAwesome="mortar-board" href="/paginas/recertificacion/Grafico.xhtml"></b:navLink>
@@ -91,9 +71,6 @@
 
         </b:navBar> 
         <p:growl id="growl" sticky="true" />
-        <ui:include src="AbreCaja.xhtml"/>
-        <ui:include src="cierraCaja.xhtml"/>
-        <ui:include src="/paginas/caja/Edit.xhtml"/>
     </ui:composition>
 
 </html>
