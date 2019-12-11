@@ -6,6 +6,9 @@ import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.CapacitacionFacade;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -27,6 +30,7 @@ public class CapacitacionController implements Serializable {
     private Facades.CapacitacionFacade ejbFacade;
     private List<Capacitacion> items = null;
     private Capacitacion selected;
+    private List<String> listaFechas;
 
     public CapacitacionController() {
     }
@@ -162,4 +166,13 @@ public class CapacitacionController implements Serializable {
 
     }
 
+    public List<String> convertirListaFechas(List<Date> listaFechaDate) {
+        this.listaFechas = new ArrayList<>();
+        SimpleDateFormat formatoFecha= new SimpleDateFormat("dd/MM/yyyy");
+        for (Date date : listaFechaDate) {
+            this.listaFechas.add(formatoFecha.format(date) + " ");
+        }
+        System.out.println("lista de fechas date"+ listaFechas);
+        return this.listaFechas;
+    }
 }

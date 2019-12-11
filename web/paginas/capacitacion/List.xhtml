@@ -50,7 +50,7 @@
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListCapacitacionTitle_fechas}"/>
                         </f:facet>
-                        <p:outputLabel value="#{item.fechas}" />
+                        <p:outputLabel value="#{capacitacionController.convertirListaFechas(item.fechas)}" />
                     </p:column>
                     <p:column>
                         <f:facet name="header">
