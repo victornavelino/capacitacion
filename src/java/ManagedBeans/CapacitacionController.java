@@ -21,6 +21,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.model.DualListModel;
 
 @Named("capacitacionController")
 @SessionScoped
@@ -31,6 +32,7 @@ public class CapacitacionController implements Serializable {
     private List<Capacitacion> items = null;
     private Capacitacion selected;
     private List<String> listaFechas;
+    private DualListModel<String> listaPickAreas;
 
     public CapacitacionController() {
     }
@@ -125,6 +127,22 @@ public class CapacitacionController implements Serializable {
         return getFacade().findAll();
     }
 
+    public List<String> getListaFechas() {
+        return listaFechas;
+    }
+
+    public void setListaFechas(List<String> listaFechas) {
+        this.listaFechas = listaFechas;
+    }
+
+    public DualListModel<String> getListaPickAreas() {
+        return listaPickAreas;
+    }
+
+    public void setListaPickAreas(DualListModel<String> listaPickAreas) {
+        this.listaPickAreas = listaPickAreas;
+    }
+
     @FacesConverter(forClass = Capacitacion.class)
     public static class CapacitacionControllerConverter implements Converter {
 
@@ -168,11 +186,12 @@ public class CapacitacionController implements Serializable {
 
     public List<String> convertirListaFechas(List<Date> listaFechaDate) {
         this.listaFechas = new ArrayList<>();
-        SimpleDateFormat formatoFecha= new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         for (Date date : listaFechaDate) {
             this.listaFechas.add(formatoFecha.format(date) + " ");
         }
-        System.out.println("lista de fechas date"+ listaFechas);
+        System.out.println("lista de fechas date" + listaFechas);
         return this.listaFechas;
     }
+
 }

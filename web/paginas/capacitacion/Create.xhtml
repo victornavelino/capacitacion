@@ -18,13 +18,26 @@
                             <p:inputText id="titulo" value="#{capacitacionController.selected.titulo}" title="#{bundle.CreateCapacitacionTitle_titulo}" size="150" maxlength="300" />
                             <p:outputLabel value="#{bundle.CreateCapacitacionLabel_anio}" for="anio" />
                             <p:inputText id="anio" value="#{capacitacionController.selected.anio}" title="#{bundle.CreateCapacitacionTitle_anio}" />
-                            <p:outputLabel value="Areas" for="tipoDocumento" />
-                            <p:selectOneMenu id="tipoDocumento" value="#{medicoController.selected.persona.documentoIdentidad.tipoDocumento}" 
-                                             style="width: 150px">
-                                <f:selectItems value="#{tipoDocumentoController.itemsAvailableSelectOne}"
-                                               var="tipoDocumentoItem"
-                                               itemValue="#{tipoDocumentoItem}"/>
-                            </p:selectOneMenu>
+                            <p:outputLabel value="Areas" for="pickListAreas" />
+                            <p:pickList id="pickList" value="#{pickListView.investigadorDualListModel}" var="invest" effect="bounce"
+                                        itemValue="#{invest}" itemLabel="#{invest.persona}" 
+                                        showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains"  converter="ConversorGenerico">
+
+                                <f:facet name="sourceCaption">Todos</f:facet>
+                                <f:facet name="targetCaption">Autores Proyecto</f:facet>
+
+                                <p:ajax event="transfer" listener="#{pickListView.onTransfer}" update="msg" />
+
+
+                                <p:column style="width:10%">
+                                    <h:outputText styleClass="ui-theme ui-theme-#{invest}" />
+                                </p:column>
+
+                                <p:column style="width:90%;">
+                                    <h:outputText value="#{invest}" />
+                                </p:column>
+                            </p:pickList>
+
                             <p:outputLabel for="multiselect" value="Seleccione Fechas de la Capacitacion:" />
                             <p:datePicker id="multiselect" selectionMode="multiple" value="#{capacitacionController.selected.fechas}" pattern="dd/MM/yyyy" readonlyInput="true" size="150" maxlength="300"/>
                             <p:outputLabel value="#{bundle.CreateCapacitacionLabel_cantidadMinimaAsistencia}" for="cantidadMinimaAsistencia" />

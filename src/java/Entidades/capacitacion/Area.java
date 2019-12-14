@@ -63,7 +63,7 @@ public class Area implements Serializable {
 
     @Override
     public String toString() {
-        return "capacitacion.Area[ id=" + id + " ]";
+        return nombre;
     }
     
 }
