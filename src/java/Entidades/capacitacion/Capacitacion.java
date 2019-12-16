@@ -41,6 +41,11 @@ public class Capacitacion implements Serializable {
     private List<Destinatario> destinatarios;
     @OneToMany
     private List<Disertante> disertantes;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date apertura;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date cierre;
+    private Boolean habilitada;
     
 
     public Long getId() {
@@ -113,6 +118,30 @@ public class Capacitacion implements Serializable {
 
     public void setDisertantes(List<Disertante> disertantes) {
         this.disertantes = disertantes;
+    }
+
+    public Date getApertura() {
+        return apertura;
+    }
+
+    public void setApertura(Date apertura) {
+        this.apertura = apertura;
+    }
+
+    public Date getCierre() {
+        return cierre;
+    }
+
+    public void setCierre(Date cierre) {
+        this.cierre = cierre;
+    }
+
+    public Boolean getHabilitada() {
+        return habilitada;
+    }
+
+    public void setHabilitada(Boolean habilitada) {
+        this.habilitada = habilitada;
     }
 
     @Override

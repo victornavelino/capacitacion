@@ -25,8 +25,8 @@
                              rowsPerPageTemplate="10,20,30,40,50"
                              >
 
-                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton habilitarButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton habilitarButton"/>
 
                     <p:column>
                         <f:facet name="header">
@@ -82,6 +82,25 @@
                         </f:facet>
                         <h:outputText value="#{item.cantidadHoras}"/>
                     </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Habilitar Capacitacion"/>
+                        </f:facet>
+                        <p:commandButton id="habilitarButton"   icon="ui-icon-pencil" value="#{item.habilitada eq 'TRUE' ? 'Habilitada' : 'Deshabilitada'}" update=":HabilitacionEditForm" oncomplete="PF('HabilitacionEditDialog').show()" disabled="#{empty capacitacionController.selected}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Habilitada Desde"/>
+                        </f:facet>
+                        <h:outputText value="#{capacitacionController.formatearFecha(item.apertura)}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Habilitada Hasta"/>
+                        </f:facet>
+                        <h:outputText value="#{capacitacionController.formatearFecha(item.cierre)}" />
+                    </p:column>
+
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{capacitacionController.prepareCreate}" update=":CapacitacionCreateForm" oncomplete="PF('CapacitacionCreateDialog').show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CapacitacionViewForm" oncomplete="PF('CapacitacionViewDialog').show()" disabled="#{empty capacitacionController.selected}"/>
@@ -95,5 +114,6 @@
         <ui:include src="Create.xhtml"/>
         <ui:include src="Edit.xhtml"/>
         <ui:include src="View.xhtml"/>
+        <ui:include src="Habilitar.xhtml"/>
     </ui:define>
 </ui:composition>

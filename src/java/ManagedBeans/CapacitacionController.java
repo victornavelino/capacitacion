@@ -233,5 +233,16 @@ public class CapacitacionController implements Serializable {
         }
         return this.listaString;
     }
+    
+    public String formatearFecha(Date fecha){
+       SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+         return formatoFecha.format(fecha);
+        } catch (Exception e) {
+         return "";
+        }
+       
+               
+    }
 
 }

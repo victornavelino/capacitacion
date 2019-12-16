@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="HabilitacionEditDlg" widgetVar="HabilitacionEditDialog" modal="true" position="top" resizable="true" height="300" appendTo="@(body)" header="Habilitar Capacitacion">
+            <h:form id="HabilitacionEditForm">
+                <h:panelGroup id="display">
+                    <p:panel id="pPri" header="Habilitar / Deshabilitar Capacitacion" >
+                        <p:growl id="msg" showDetail="true" escape="false" />
+                        <p:panelGrid columns="2" styleClass="noBorders">
+
+                            <p:outputLabel value="Habilitar convocatoria" />
+                            <p:selectBooleanCheckbox value="#{capacitacionController.selected.habilitada}" itemLabel="Habilitada"/>
+                            <p:outputLabel for="aperturaDate" value="Apertura Inscripcion:" />
+                            <p:datePicker id="aperturaDate" value="#{capacitacionController.selected.apertura}" pattern="dd/MM/yyyy" />
+                            <p:outputLabel for="cierreDate" value="Cierre Inscripcion:" />
+                            <p:datePicker id="cierreDate" value="#{capacitacionController.selected.cierre}" pattern="dd/MM/yyyy" />
+                        </p:panelGrid>
+                        <p:commandButton actionListener="#{capacitacionController.update}" value="#{bundle.Save}" update="display,:CapacitacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'HabilitacionEditDialog');"/>
+                        <p:commandButton value="#{bundle.Cancel}" onclick="HabilitacionEditDialog.hide()"/>
+                    </p:panel>
+                </h:panelGroup>
+
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
