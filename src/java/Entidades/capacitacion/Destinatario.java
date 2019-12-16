@@ -65,7 +65,7 @@ public class Destinatario implements Serializable {
 
     @Override
     public String toString() {
-        return "capacitacion.Destinatario[ id=" + id + " ]";
+        return this.getDescripcion();
     }
     
 }

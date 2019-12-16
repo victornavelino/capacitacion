@@ -26,7 +26,7 @@ import javax.persistence.Temporal;
  * @author hugo
  */
 @Entity
-@Table(name="persona")
+@Table(name = "persona")
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -139,7 +139,7 @@ public class Persona implements Serializable {
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -162,7 +162,11 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "capacitacion.Persona[ id=" + id + " ]";
+        try {
+            return apellido + ", " + nombre;
+        } catch (Exception e) {
+            return "";
+        }
     }
-    
+
 }

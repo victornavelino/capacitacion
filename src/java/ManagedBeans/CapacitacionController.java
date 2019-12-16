@@ -1,5 +1,6 @@
 package ManagedBeans;
 
+import Entidades.capacitacion.Area;
 import Entidades.capacitacion.Capacitacion;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
@@ -17,10 +18,12 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 import org.primefaces.model.DualListModel;
 
 @Named("capacitacionController")
@@ -32,9 +35,21 @@ public class CapacitacionController implements Serializable {
     private List<Capacitacion> items = null;
     private Capacitacion selected;
     private List<String> listaFechas;
+    private List<String> listaAreas;
+    private List<String> listaString;
     private DualListModel<String> listaPickAreas;
+    @Inject
+    private PickListView pickListView;
 
     public CapacitacionController() {
+    }
+
+    public PickListView getPickListView() {
+        return pickListView;
+    }
+
+    public void setPickListView(PickListView pickListView) {
+        this.pickListView = pickListView;
     }
 
     public Capacitacion getSelected() {
@@ -57,11 +72,16 @@ public class CapacitacionController implements Serializable {
 
     public Capacitacion prepareCreate() {
         selected = new Capacitacion();
+        this.getPickListView().init();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
+        //asociamos los picklist cargados
+        selected.setAreas(pickListView.getAreaDualListModel().getTarget());
+        selected.setDestinatarios(pickListView.getDestDualListModel().getTarget());
+        selected.setDisertantes(pickListView.getDisertDualListModel().getTarget());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("CapacitacionCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -69,6 +89,10 @@ public class CapacitacionController implements Serializable {
     }
 
     public void update() {
+        //asociamos los picklist cargados
+        selected.setAreas(pickListView.getAreaDualListModel().getTarget());
+        selected.setDestinatarios(pickListView.getDestDualListModel().getTarget());
+        selected.setDisertantes(pickListView.getDisertDualListModel().getTarget());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("CapacitacionUpdated"));
     }
 
@@ -143,6 +167,14 @@ public class CapacitacionController implements Serializable {
         this.listaPickAreas = listaPickAreas;
     }
 
+    public List<String> getListaAreas() {
+        return listaAreas;
+    }
+
+    public void setListaAreas(List<String> listaAreas) {
+        this.listaAreas = listaAreas;
+    }
+
     @FacesConverter(forClass = Capacitacion.class)
     public static class CapacitacionControllerConverter implements Converter {
 
@@ -192,6 +224,14 @@ public class CapacitacionController implements Serializable {
         }
         System.out.println("lista de fechas date" + listaFechas);
         return this.listaFechas;
+    }
+
+    public List<String> convertirLista(List<Object> lista) {
+        this.listaString = new ArrayList<>();
+        for (Object o : lista) {
+            this.listaString.add(o.toString());
+        }
+        return this.listaString;
     }
 
 }

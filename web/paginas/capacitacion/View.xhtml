@@ -8,23 +8,30 @@
 
     <ui:composition>
 
-        <p:dialog id="CapacitacionViewDlg" widgetVar="CapacitacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCapacitacionTitle}">
+        <p:dialog id="CapacitacionViewDlg" widgetVar="CapacitacionViewDialog" modal="true" resizable="false" position="top" height="300" appendTo="@(body)" >
             <h:form id="CapacitacionViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{capacitacionController.selected != null}">
-                        <h:outputText value="#{bundle.ViewCapacitacionLabel_id}"/>
-                        <h:outputText value="#{capacitacionController.selected.id}" title="#{bundle.ViewCapacitacionTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewCapacitacionLabel_titulo}"/>
-                        <h:outputText value="#{capacitacionController.selected.titulo}" title="#{bundle.ViewCapacitacionTitle_titulo}"/>
-                        <h:outputText value="#{bundle.ViewCapacitacionLabel_anio}"/>
-                        <h:outputText value="#{capacitacionController.selected.anio}" title="#{bundle.ViewCapacitacionTitle_anio}"/>
-                        <h:outputText value="#{bundle.ViewCapacitacionLabel_fechas}"/>
-                        <h:outputText value="#{capacitacionController.selected.fechas}" title="#{bundle.ViewCapacitacionTitle_fechas}"/>
-                        <h:outputText value="#{bundle.ViewCapacitacionLabel_cantidadMinimaAsistencia}"/>
-                        <h:outputText value="#{capacitacionController.selected.cantidadMinimaAsistencia}" title="#{bundle.ViewCapacitacionTitle_cantidadMinimaAsistencia}"/>
-                        <h:outputText value="#{bundle.ViewCapacitacionLabel_cantidadHoras}"/>
-                        <h:outputText value="#{capacitacionController.selected.cantidadHoras}" title="#{bundle.ViewCapacitacionTitle_cantidadHoras}"/>
-                    </p:panelGrid>
+                    <p:panel id="pPri" header="Datos de la Capacitacion" >
+                        <p:panelGrid columns="2" rendered="#{capacitacionController.selected != null}" styleClass="noBorders">
+
+                            <h:outputText value="#{bundle.ViewCapacitacionLabel_titulo}"/>
+                            <h:outputText value="#{capacitacionController.selected.titulo}" title="#{bundle.ViewCapacitacionTitle_titulo}"/>
+                            <h:outputText value="#{bundle.ViewCapacitacionLabel_anio}"/>
+                            <h:outputText value="#{capacitacionController.selected.anio}" title="#{bundle.ViewCapacitacionTitle_anio}"/>
+                            <h:outputText value="Areas"/>
+                            <h:outputText value="#{capacitacionController.selected.areas}"/>
+                            <h:outputText value="Destinatarios"/>
+                            <h:outputText value="#{capacitacionController.selected.destinatarios}"/>
+                            <h:outputText value="Disertantes"/>
+                            <h:outputText value="#{capacitacionController.selected.disertantes}"/>
+                            <h:outputText value="#{bundle.ViewCapacitacionLabel_fechas}"/>
+                            <h:outputText value="#{capacitacionController.convertirListaFechas(capacitacionController.selected.fechas)}" />
+                            <h:outputText value="#{bundle.ViewCapacitacionLabel_cantidadMinimaAsistencia}"/>
+                            <h:outputText value="#{capacitacionController.selected.cantidadMinimaAsistencia}" title="#{bundle.ViewCapacitacionTitle_cantidadMinimaAsistencia}"/>
+                            <h:outputText value="#{bundle.ViewCapacitacionLabel_cantidadHoras}"/>
+                            <h:outputText value="#{capacitacionController.selected.cantidadHoras}" title="#{bundle.ViewCapacitacionTitle_cantidadHoras}"/>
+                        </p:panelGrid>
+                    </p:panel>
                     <p:commandButton value="#{bundle.Close}" onclick="CapacitacionViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

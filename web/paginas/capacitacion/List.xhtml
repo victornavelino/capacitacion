@@ -60,6 +60,24 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
+                            <h:outputText value="Areas"/>
+                        </f:facet>
+                        <h:outputText value="#{capacitacionController.convertirLista(item.areas)}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Destinatarios"/>
+                        </f:facet>
+                        <h:outputText value="#{capacitacionController.convertirLista(item.destinatarios)}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Disertantes"/>
+                        </f:facet>
+                        <h:outputText value="#{capacitacionController.convertirLista(item.disertantes)}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
                             <h:outputText value="#{bundle.ListCapacitacionTitle_cantidadHoras}"/>
                         </f:facet>
                         <h:outputText value="#{item.cantidadHoras}"/>
