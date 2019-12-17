@@ -58,6 +58,38 @@
                                                itemValue="#{sexoItem}"/>
                             </p:selectOneMenu>
 
+                            <h:panelGrid columns="2" 
+                                         width="720"
+                                         >
+
+                                <p:panel header="Domicilio"
+                                         style="width: 700px">
+                                    <h:panelGrid columns="2" width="550">
+                                        <p:commandButton id="btnDomicilioParticipante" 
+                                                         value="Cargar Datos"
+                                                         oncomplete="PF('dgDomicilioParticipante').show();"
+                                                         actionListener="#{domicilioBean.definirActionBoton}"
+                                                         icon="ui-icon-disk"
+                                                         >
+                                            <f:setPropertyActionListener value="#{domicilioBean.domicilio}" target="#{domicilioBean.domicilio}"/> 
+
+                                        </p:commandButton> 
+
+                                        <p:panel id="pnDomicilio" >
+                                            <h:outputText  value="Localidad:  "/>
+                                            <h:outputText  value="#{domicilioBean.domicilio.localidad.descripcion}"/> <br></br>
+                                            <h:outputText  value="Barrio:  "/>
+                                            <h:outputText  value="#{domicilioBean.domicilio.barrio}"/> <br></br>
+                                            <h:outputText  value="Calle:  "/>
+                                            <h:outputText  value="#{domicilioBean.domicilio.calle}"/><br></br>
+                                            <h:outputText  value="Numero:  "/>
+                                            <h:outputText  value="#{domicilioBean.domicilio.numero}"/><br></br>
+                                        </p:panel>
+                                    </h:panelGrid>
+                                </p:panel>
+
+                            </h:panelGrid>
+
                         </p:panelGrid>
                     </p:panel>
                     <p:commandButton actionListener="#{participanteController.create}" value="#{bundle.Save}" update="display,:ParticipanteListForm:datalist,:growl" oncomplete="handleSubmit(args,'ParticipanteCreateDialog');"/>

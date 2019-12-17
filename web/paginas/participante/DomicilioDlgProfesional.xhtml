@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--Dialogo para cargar Domicilio -->
+    <h:form id="domicilioCreateForm">
+        <p:dialog id="dgDomicilioParticipante"
+                  widgetVar="dgDomicilioParticipante"
+                  modal="true"
+                  width="650"
+                  height="500"
+                  closable="true" position="top" 
+                  >
+            <f:facet name="header">
+                <h:outputText value="Domicilio"/>
+            </f:facet>
+            <p:panel header="Lugar de Residencia">
+                <p:panelGrid columns="2" styleClass="noBorders">
+
+                    <h:outputText value="Provincia"/>
+
+
+                    <p:selectOneMenu id="somProvincia"
+                                     converter="ConversorGenerico"
+                                     value="#{domicilioBean.provincia}"
+                                     >
+                        <f:selectItem itemLabel="Seleccionar" noSelectionOption="true"/>
+                        <f:selectItems value="#{domicilioBean.listaProvincias}"/>
+                        <p:ajax                                    
+                            listener="#{domicilioBean.cargarDepartamentos()}"
+                            update=":domicilioCreateForm:somDepartamento,:domicilioCreateForm:somLocalidad"/> 
+                    </p:selectOneMenu>
+
+                    <h:outputText value="Departamento"/>
+
+
+                    <p:selectOneMenu id="somDepartamento"
+                                     converter="ConversorGenerico"
+                                     value="#{domicilioBean.departamento}"
+                                     >
+                        <f:selectItem itemLabel="Seleccionar" noSelectionOption="true"/>
+
+                        <f:selectItems value="#{domicilioBean.listaDepartamentos}"/>
+
+                        <p:ajax  
+                            update=":domicilioCreateForm:somLocalidad"
+                            listener="#{domicilioBean.cargarLocalidades()}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputText value="Localidad"/>
+
+
+                    <p:selectOneMenu id="somLocalidad"
+                                     converter="ConversorGenerico"
+                                     value="#{domicilioBean.domicilio.localidad}">
+                        <f:selectItem itemLabel="Seleccionar" noSelectionOption="true"/>
+                        <f:selectItems value="#{domicilioBean.listaLocalidades}"/>
+                    </p:selectOneMenu>
+
+
+
+                    <h:outputText value="Calle"/>
+
+                    <p:inputText id="itCalle"
+                                 value="#{domicilioBean.domicilio.calle}"
+                                 required="false"/>
+
+
+                    <h:outputText value="Barrio"/>
+
+                    <p:inputText id="itBarrio"
+                                 value="#{domicilioBean.domicilio.barrio}"
+                                 required="false"/>
+
+
+                    <h:outputText value="Nro"/>
+
+                    <p:inputText id="itNro"
+                                 value="#{domicilioBean.domicilio.numero}"
+                                 required="false"/>
+
+
+                </p:panelGrid>
+            </p:panel>
+
+            <p:commandButton id="cbDomicilio"
+                             value="Aceptar"
+                             actionListener="#{domicilioBean.validarLocalidad}"
+                             ajax="true"
+                             update="ParticipanteCreateForm:pnDomicilio"                           
+                             >
+
+            </p:commandButton>
+            <p:messages />
+
+
+        </p:dialog> 
+    </h:form>
+</html>
