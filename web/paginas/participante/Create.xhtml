@@ -8,19 +8,27 @@
 
     <ui:composition>
 
-        <p:dialog id="ParticipanteCreateDlg" widgetVar="ParticipanteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateParticipanteTitle}">
+        <p:dialog id="ParticipanteCreateDlg" widgetVar="ParticipanteCreateDialog" modal="true" position="top" resizable="true" height="550" appendTo="@(body)" header="#{bundle.CreateParticipanteTitle}">
             <h:form id="ParticipanteCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{participanteController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateParticipanteLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{participanteController.selected.id}" title="#{bundle.CreateParticipanteTitle_id}" />
-                        <p:outputLabel value="#{bundle.CreateParticipanteLabel_persona}" for="persona" />
-                        <p:selectOneMenu id="persona" value="#{participanteController.selected.persona}" >
-                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
-                                           var="personaItem"
-                                           itemValue="#{personaItem}"/>
-                        </p:selectOneMenu>
-                    </p:panelGrid>
+                    <p:panel id="pPri" header="Datos del Participante" >
+                        <p:panelGrid columns="2" rendered="#{participanteController.selected != null}" styleClass="noBorders">
+                            <p:outputLabel value="Nombre: " for="itNombre" />
+                                <p:inputText id="itNombre" 
+                                             value="#{participanteController.selected.persona.nombre}"
+                                             title="Nombre"
+                                             size="50"
+                                             maxlength="100"/>
+
+                                <p:outputLabel value="Apellido: " for="itApellido" />
+                                <p:inputText id="itApellido" 
+                                             value="#{participanteController.selected.persona.apellido}"
+                                             title="Nombre"
+                                             size="50"
+                                             maxlength="100"/>
+
+                        </p:panelGrid>
+                    </p:panel>
                     <p:commandButton actionListener="#{participanteController.create}" value="#{bundle.Save}" update="display,:ParticipanteListForm:datalist,:growl" oncomplete="handleSubmit(args,'ParticipanteCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ParticipanteCreateDialog.hide()"/>
                 </h:panelGroup>

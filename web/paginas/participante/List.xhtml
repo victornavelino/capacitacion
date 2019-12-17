@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../../Templates/paginasTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                >
+    <ui:define name="content">
 
-    <ui:composition template="/template.xhtml">
 
-
-        <ui:define name="title">
+        <h3>
             <h:outputText value="#{bundle.ListParticipanteTitle}"></h:outputText>
-        </ui:define>
+        </h3>
 
-        <ui:define name="body">
-            <h:form id="ParticipanteListForm">
+        <h:form id="ParticipanteListForm">
                 <p:panel header="#{bundle.ListParticipanteTitle}">
                     <p:dataTable id="datalist" value="#{participanteController.items}" var="item"
                                  selectionMode="single" selection="#{participanteController.selected}"
@@ -55,4 +56,3 @@
         </ui:define>
     </ui:composition>
 
-</html>

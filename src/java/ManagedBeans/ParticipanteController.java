@@ -1,6 +1,10 @@
 package ManagedBeans;
 
 import Entidades.capacitacion.Participante;
+import Entidades.persona.DocumentoIdentidad;
+import Entidades.persona.Domicilio;
+import Entidades.persona.Persona;
+import Entidades.persona.TipoDocumento;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.ParticipanteFacade;
@@ -18,6 +22,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("participanteController")
 @SessionScoped
@@ -27,6 +32,8 @@ public class ParticipanteController implements Serializable {
     private Facades.ParticipanteFacade ejbFacade;
     private List<Participante> items = null;
     private Participante selected;
+    @Inject
+    private DomicilioBean domicilioBean;
 
     public ParticipanteController() {
     }
@@ -51,6 +58,10 @@ public class ParticipanteController implements Serializable {
 
     public Participante prepareCreate() {
         selected = new Participante();
+        selected.setPersona(new Persona());
+        selected.getPersona().setDocumentoIdentidad(new DocumentoIdentidad());
+        selected.getPersona().getDocumentoIdentidad().setTipoDocumento(new TipoDocumento());
+        domicilioBean.setDomicilio(new Domicilio());
         initializeEmbeddableKey();
         return selected;
     }
