@@ -58,37 +58,60 @@
                                                itemValue="#{sexoItem}"/>
                             </p:selectOneMenu>
 
-                            <h:panelGrid columns="2" 
-                                         width="720"
-                                         >
+                            <p:commandButton id="btnDomicilioParticipante" 
+                                             value="Cargar Domicilio"
+                                             oncomplete="PF('dgDomicilioParticipante').show();"
+                                             actionListener="#{domicilioBean.definirActionBoton}"
+                                             icon="ui-icon-disk"
+                                             >
+                                <f:setPropertyActionListener value="#{domicilioBean.domicilio}" target="#{domicilioBean.domicilio}"/> 
 
-                                <p:panel header="Domicilio"
-                                         style="width: 700px">
-                                    <h:panelGrid columns="2" width="550">
-                                        <p:commandButton id="btnDomicilioParticipante" 
-                                                         value="Cargar Datos"
-                                                         oncomplete="PF('dgDomicilioParticipante').show();"
-                                                         actionListener="#{domicilioBean.definirActionBoton}"
-                                                         icon="ui-icon-disk"
-                                                         >
-                                            <f:setPropertyActionListener value="#{domicilioBean.domicilio}" target="#{domicilioBean.domicilio}"/> 
+                            </p:commandButton> 
 
-                                        </p:commandButton> 
+                            <p:panel header="Domicilio"
+                                     style="width: 500px">
+                                <h:panelGrid columns="2" width="450">
 
-                                        <p:panel id="pnDomicilio" >
-                                            <h:outputText  value="Localidad:  "/>
-                                            <h:outputText  value="#{domicilioBean.domicilio.localidad.descripcion}"/> <br></br>
-                                            <h:outputText  value="Barrio:  "/>
-                                            <h:outputText  value="#{domicilioBean.domicilio.barrio}"/> <br></br>
-                                            <h:outputText  value="Calle:  "/>
-                                            <h:outputText  value="#{domicilioBean.domicilio.calle}"/><br></br>
-                                            <h:outputText  value="Numero:  "/>
-                                            <h:outputText  value="#{domicilioBean.domicilio.numero}"/><br></br>
-                                        </p:panel>
-                                    </h:panelGrid>
-                                </p:panel>
 
-                            </h:panelGrid>
+                                    <p:panel id="pnDomicilio" >
+                                        <h:outputText  value="Localidad:  "/>
+                                        <h:outputText  value="#{domicilioBean.domicilio.localidad.descripcion}"/> <br></br>
+                                        <h:outputText  value="Barrio:  "/>
+                                        <h:outputText  value="#{domicilioBean.domicilio.barrio}"/> <br></br>
+                                        <h:outputText  value="Calle:  "/>
+                                        <h:outputText  value="#{domicilioBean.domicilio.calle}"/><br></br>
+                                        <h:outputText  value="Numero:  "/>
+                                        <h:outputText  value="#{domicilioBean.domicilio.numero}"/><br></br>
+                                    </p:panel>
+                                </h:panelGrid>
+                            </p:panel>
+
+                            <p:outputLabel value="Email" for="email" />
+                            <p:inputText id="email" required="true" label="email" size="40"
+                                         requiredMessage="Por favor ingrese un email valido."
+                                         validatorMessage="Formato de email invalido!"
+                                         value="#{participanteController.selected.persona.correosElectronico.direccion}">
+                                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            </p:inputText>
+
+                            <p:outputLabel value="Telefono"/>
+                            <p:panel header="Telefono"
+                                     style="width: 500px">
+                                <h:panelGrid columns="2" width="450">
+                                    
+                                        <h:outputText  value="Tipo Telefono:  "/>
+                                        <p:selectOneMenu id="tipoTelefono" value="#{participanteController.selected.persona.telefono.tipoTelefono}">
+                                            <f:selectItems value="#{tipoTelefonoController.itemsAvailableSelectOne}"
+                                                           var="tipoTelefonoItem"
+                                                           itemValue="#{tipoTelefonoItem}"/>
+                                        </p:selectOneMenu>
+                                        <h:outputText  value="Telefono:  "/>
+                                        <p:inputText value="#{participanteController.selected.persona.telefono.numero}"/>
+                                    
+                                </h:panelGrid>
+                            </p:panel>
+
+
 
                         </p:panelGrid>
                     </p:panel>

@@ -30,8 +30,9 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.PrimeFaces;
 import org.primefaces.component.commandbutton.CommandButton;
-
+import org.primefaces.context.PrimeRequestContext;
 
 /**
  *
@@ -62,7 +63,7 @@ public class DomicilioBean implements Serializable {
     int iTipoBoton;
     //RESIDENCIA
     private Localidad residencia;
-    
+
     private LocalidadController localidadController;
     private String localidadString;
     @EJB
@@ -75,7 +76,6 @@ public class DomicilioBean implements Serializable {
     public void setLocalidadString(String localidadString) {
         this.localidadString = localidadString;
     }
-    
 
     public Localidad getResidencia() {
         return residencia;
@@ -213,7 +213,6 @@ public class DomicilioBean implements Serializable {
         }
     }
 
-
     public void cargarProvPais() throws Exception {
         listaProvincias = new ArrayList<SelectItem>();
 
@@ -240,8 +239,10 @@ public class DomicilioBean implements Serializable {
         //   if (this.getPersona().getLugarNacimiento() != null) {
         //this.setsDireccion(this.getPersona().getLugarNacimiento().getDepartamento().getDescripcion() + ", " + this.getPersona().getLugarNacimiento().getDescripcion());
         //System.out.println(actualizarPanel);
-  /////////      RequestContext.getCurrentInstance().update("MedicoCreateForm:pnDomicilio");
- ////////       RequestContext.getCurrentInstance().execute("PF('dgDomicilioProf').hide();");
+//        PrimeFaces.current().("ParticipanteCreateForm:pnDomicilio");
+//        PrimeFaces.current().close("PF('dgDomicilioParticipante').hide();");
+//        PrimeFaces.current().dialog().closeDynamic("dgDomicilioParticipante");
+        
     }
 
     public void validarLocalidadNacimiento(ActionEvent e) {
@@ -251,8 +252,8 @@ public class DomicilioBean implements Serializable {
         //   if (this.getPersona().getLugarNacimiento() != null) {
         //this.setsDireccion(this.getPersona().getLugarNacimiento().getDepartamento().getDescripcion() + ", " + this.getPersona().getLugarNacimiento().getDescripcion());
         //System.out.println(actualizarPanel);
-    ////////    RequestContext.getCurrentInstance().update("MedicoCreateForm:pnLugarNacimiento");
-    ///////   RequestContext.getCurrentInstance().execute("PF('dgNacimientoProf').hide();");
+        PrimeFaces.current().executeScript("ParticipanteCreateForm:pnLugarNacimiento");
+        PrimeFaces.current().executeScript("PF('dgDomicilioParticipante').hide();");
     }
 
     public void afterPhase(PhaseEvent PhaseEvent) {
@@ -297,12 +298,12 @@ public class DomicilioBean implements Serializable {
     }
 
     public void crearLocalidad() {
-        localidad =new Localidad();
+        localidad = new Localidad();
         localidad.setDescripcion(localidadString.toUpperCase());
         localidad.setDepartamento(departamento);
         localidadFacade.create(localidad);
         JsfUtil.addSuccessMessage("Localidad Creada");
- ///////       RequestContext.getCurrentInstance().update("LocalidadListForm:datalist");
+        PrimeFaces.current().executeScript("LocalidadListForm:datalist");
 
     }
 }

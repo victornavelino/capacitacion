@@ -1,9 +1,11 @@
 package ManagedBeans;
 
 import Entidades.capacitacion.Participante;
+import Entidades.persona.CorreoElectronico;
 import Entidades.persona.DocumentoIdentidad;
 import Entidades.persona.Domicilio;
 import Entidades.persona.Persona;
+import Entidades.persona.Telefono;
 import Entidades.persona.TipoDocumento;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
@@ -61,12 +63,15 @@ public class ParticipanteController implements Serializable {
         selected.setPersona(new Persona());
         selected.getPersona().setDocumentoIdentidad(new DocumentoIdentidad());
         selected.getPersona().getDocumentoIdentidad().setTipoDocumento(new TipoDocumento());
+        selected.getPersona().setCorreosElectronico(new CorreoElectronico());
+        selected.getPersona().setTelefono(new Telefono());
         domicilioBean.setDomicilio(new Domicilio());
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
+        selected.getPersona().setDomicilio(domicilioBean.getDomicilio());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ParticipanteCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -74,6 +79,7 @@ public class ParticipanteController implements Serializable {
     }
 
     public void update() {
+        selected.getPersona().setDomicilio(domicilioBean.getDomicilio());
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ParticipanteUpdated"));
     }
 

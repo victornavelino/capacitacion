@@ -93,6 +93,7 @@ and open the template in the editor.
             <p:commandButton id="cbDomicilio"
                              value="Aceptar"
                              actionListener="#{domicilioBean.validarLocalidad}"
+                             oncomplete="PF('dgDomicilioParticipante').hide();"
                              ajax="true"
                              update="ParticipanteCreateForm:pnDomicilio"                           
                              >

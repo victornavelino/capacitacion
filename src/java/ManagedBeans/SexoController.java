@@ -82,7 +82,7 @@ public class SexoController implements Serializable {
                 return null;
             }
             SexoController controller = (SexoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "tipoDocumentoController");
+                    getValue(facesContext.getELContext(), null, "sexoController");
             return controller.getTipoDocumento(getKey(value));
         }
 
