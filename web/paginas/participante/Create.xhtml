@@ -14,18 +14,49 @@
                     <p:panel id="pPri" header="Datos del Participante" >
                         <p:panelGrid columns="2" rendered="#{participanteController.selected != null}" styleClass="noBorders">
                             <p:outputLabel value="Nombre: " for="itNombre" />
-                                <p:inputText id="itNombre" 
-                                             value="#{participanteController.selected.persona.nombre}"
-                                             title="Nombre"
-                                             size="50"
-                                             maxlength="100"/>
+                            <p:inputText id="itNombre" 
+                                         value="#{participanteController.selected.persona.nombre}"
+                                         title="Nombre"
+                                         size="50"
+                                         maxlength="100"/>
 
-                                <p:outputLabel value="Apellido: " for="itApellido" />
-                                <p:inputText id="itApellido" 
-                                             value="#{participanteController.selected.persona.apellido}"
-                                             title="Nombre"
-                                             size="50"
-                                             maxlength="100"/>
+                            <p:outputLabel value="Apellido: " for="itApellido" />
+                            <p:inputText id="itApellido" 
+                                         value="#{participanteController.selected.persona.apellido}"
+                                         title="Nombre"
+                                         size="50"
+                                         maxlength="100"/>
+
+                            <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_tipoDocumento}" for="tipoDocumento" />
+                            <p:selectOneMenu id="tipoDocumento" value="#{participanteController.selected.persona.documentoIdentidad.tipoDocumento}" 
+                                             style="width: 150px">
+                                <f:selectItems value="#{tipoDocumentoController.itemsAvailableSelectOne}"
+                                               var="tipoDocumentoItem"
+                                               itemValue="#{tipoDocumentoItem}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="#{bundle.CreateDocumentoIdentidadLabel_numero}" for="numero" />
+                            <p:inputText id="numero" value="#{participanteController.selected.persona.documentoIdentidad.numero}" title="#{bundle.CreateDocumentoIdentidadTitle_numero}" />
+
+                            <p:outputLabel value="Cuil" for="itCuil" />
+                            <p:inputMask id="itCuil"
+                                         mask="99-99999999-9"
+                                         value="#{participanteController.selected.persona.cuil}" 
+                                         title="Cuil" />
+
+                            <p:outputLabel value="FechaNacimiento:" for="caFechaNacimiento" />
+                            <p:calendar id="caFechaNacimiento" 
+                                        value="#{participanteController.selected.persona.fechaNacimiento}" 
+                                        title="FechaNacimiento:" 
+                                        pattern="dd/MM/yyyy"
+                                        />
+
+                            <p:outputLabel value="#{bundlePersona.CreatePersonaLabel_sexo}" for="sexo" />
+                            <p:selectOneMenu id="sexo" value="#{participanteController.selected.persona.sexo}" >
+                                <f:selectItems value="#{sexoController.itemsAvailableSelectOne}"
+                                               var="sexoItem"
+                                               itemValue="#{sexoItem}"/>
+                            </p:selectOneMenu>
 
                         </p:panelGrid>
                     </p:panel>

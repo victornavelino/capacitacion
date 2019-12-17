@@ -21,7 +21,7 @@ import javax.persistence.Query;
 @Stateless
 public class DepartamentoRN implements DepartamentoRNLocal {
     
-    @PersistenceContext(unitName = "ProyectoColegioPU")
+    @PersistenceContext(unitName = "ProyectoCapacitacionPU")
     private EntityManager em;
     @EJB
     private DepartamentoFacade departamentoFacade;

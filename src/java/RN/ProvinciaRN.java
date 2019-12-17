@@ -20,7 +20,7 @@ import javax.persistence.Query;
 @Stateless
 public class ProvinciaRN implements ProvinciaRNLocal {
 
-    @PersistenceContext(unitName = "ProyectoColegioPU")
+    @PersistenceContext(unitName = "ProyectoCapacitacionPU")
     private EntityManager em;
     @EJB
     private ProvinciaFacade provinciaFacade;
