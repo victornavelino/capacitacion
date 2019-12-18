@@ -16,44 +16,50 @@
         </h3>
 
         <h:form id="ParticipanteListForm">
-                <p:panel header="#{bundle.ListParticipanteTitle}">
-                    <p:dataTable id="datalist" value="#{participanteController.items}" var="item"
-                                 selectionMode="single" selection="#{participanteController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+            <p:panel header="#{bundle.ListParticipanteTitle}">
+                <p:dataTable id="datalist" value="#{participanteController.items}" var="item"
+                             selectionMode="single" selection="#{participanteController.selected}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipanteTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipanteTitle_persona}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.persona}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{participanteController.prepareCreate}" update=":ParticipanteCreateForm" oncomplete="PF('ParticipanteCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ParticipanteViewForm" oncomplete="PF('ParticipanteViewDialog').show()" disabled="#{empty participanteController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ParticipanteEditForm" oncomplete="PF('ParticipanteEditDialog').show()" disabled="#{empty participanteController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{participanteController.destroy}" update=":growl,datalist" disabled="#{empty participanteController.selected}"/>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Apellido"/>
                         </f:facet>
-                    </p:dataTable>
-                </p:panel>
-            </h:form>
+                        <h:outputText value="#{item.persona.apellido}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"/>
+                        </f:facet>
+                        <h:outputText value="#{item.persona.nombre}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Documento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.persona.documentoIdentidad}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{participanteController.prepareCreate}" update=":ParticipanteCreateForm" oncomplete="PF('ParticipanteCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ParticipanteViewForm" oncomplete="PF('ParticipanteViewDialog').show()" disabled="#{empty participanteController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ParticipanteEditForm" oncomplete="PF('ParticipanteEditDialog').show()" disabled="#{empty participanteController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{participanteController.destroy}" update=":growl,datalist" disabled="#{empty participanteController.selected}"/>
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
 
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
-            <ui:include src="DomicilioDlgParticipante.xhtml"/>
-        </ui:define>
-    </ui:composition>
+        <ui:include src="Create.xhtml"/>
+        <ui:include src="Edit.xhtml"/>
+        <ui:include src="View.xhtml"/>
+        <ui:include src="DomicilioDlgParticipante.xhtml"/>
+    </ui:define>
+</ui:composition>
 
