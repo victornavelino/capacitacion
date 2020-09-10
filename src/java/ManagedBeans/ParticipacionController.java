@@ -1,9 +1,11 @@
 package ManagedBeans;
 
+import Entidades.capacitacion.Capacitacion;
 import Entidades.capacitacion.Participacion;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.ParticipacionFacade;
+import RN.ParticipacionRNLocal;
 
 import java.io.Serializable;
 import java.util.List;
@@ -18,6 +20,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("participacionController")
 @SessionScoped
@@ -27,8 +30,22 @@ public class ParticipacionController implements Serializable {
     private Facades.ParticipacionFacade ejbFacade;
     private List<Participacion> items = null;
     private Participacion selected;
+    @EJB
+    private ParticipacionRNLocal participacionRNLocal;
+    @Inject
+    private CapacitacionController capacitacionController;
+    @Inject
+    private CheckBoxView checkBoxView;
 
     public ParticipacionController() {
+    }
+
+    public CheckBoxView getCheckBoxView() {
+        return checkBoxView;
+    }
+
+    public void setCheckBoxView(CheckBoxView checkBoxView) {
+        this.checkBoxView = checkBoxView;
     }
 
     public Participacion getSelected() {
@@ -37,6 +54,14 @@ public class ParticipacionController implements Serializable {
 
     public void setSelected(Participacion selected) {
         this.selected = selected;
+    }
+
+    public CapacitacionController getCapacitacionController() {
+        return capacitacionController;
+    }
+
+    public void setCapacitacionController(CapacitacionController capacitacionController) {
+        this.capacitacionController = capacitacionController;
     }
 
     protected void setEmbeddableKeys() {
@@ -51,6 +76,7 @@ public class ParticipacionController implements Serializable {
 
     public Participacion prepareCreate() {
         selected = new Participacion();
+        selected.setCapacitacion(capacitacionController.getSelected());
         initializeEmbeddableKey();
         return selected;
     }
@@ -63,6 +89,13 @@ public class ParticipacionController implements Serializable {
     }
 
     public void update() {
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ParticipacionUpdated"));
+    }
+
+    public void modificarFechasAsistencias() {
+        System.out.println("Fechas Seleccionadas" + checkBoxView.getSelectedFechas());
+        selected.setFechaAsistencias(checkBoxView.getSelectedFechas());
+
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ParticipacionUpdated"));
     }
 
@@ -79,6 +112,13 @@ public class ParticipacionController implements Serializable {
             items = getFacade().findAll();
         }
         return items;
+    }
+
+    public void cargarParticipaciones(Capacitacion capacitacion) {
+        //getFacade().
+        System.err.println("capacitacion elegida: ---" + capacitacion);
+        items = participacionRNLocal.buscarPartDeCapacitacion(capacitacion);
+        System.err.println("lista busqueda: -- " + items);
     }
 
     private void persist(PersistAction persistAction, String successMessage) {

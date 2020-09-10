@@ -150,7 +150,7 @@ public class LoginBean implements Serializable{
             session.setAttribute("userName", usuario.getUsuario());
             //PARA MOSTRAR USUARIO LOGUEADO 
             usuarioLogerBean.setUsuario(usuario);//Se guarda el usuario para poder ser mostrado como usuario logueado
-
+            
             return "index.xhtml?faces-redirect=true";
             // }//fin if
         } else {

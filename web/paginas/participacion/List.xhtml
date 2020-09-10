@@ -1,102 +1,192 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../../Templates/paginasTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                >
+    <ui:define name="content">
 
-    <ui:composition template="/template.xhtml">
-
-
-        <ui:define name="title">
+        <h3>
             <h:outputText value="#{bundle.ListParticipacionTitle}"></h:outputText>
-        </ui:define>
+        </h3> 
 
-        <ui:define name="body">
-            <h:form id="ParticipacionListForm">
-                <p:panel header="#{bundle.ListParticipacionTitle}">
-                    <p:dataTable id="datalist" value="#{participacionController.items}" var="item"
-                                 selectionMode="single" selection="#{participacionController.selected}"
-                                 paginator="true"
-                                 rowKey="#{item.id}"
-                                 rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+        <h:form id="ParticipacionListForm">
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+            <p:panel header="#{bundle.ListCapacitacionTitle}">
+                <p:dataTable id="datalist" value="#{capacitacionController.items}" var="item"
+                             selectionMode="single" selection="#{capacitacionController.selected}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipacionTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipacionTitle_capacitacion}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.capacitacion}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipacionTitle_participante}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.participante}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipacionTitle_fechaInscripcion}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fechaInscripcion}">
-                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipacionTitle_fechaAsistencias}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fechaAsistencias}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipacionTitle_resultado}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.resultado}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipacionTitle_dependencia}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dependencia}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipacionTitle_certificado}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.certificado}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListParticipacionTitle_cargo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.cargo}"/>
-                        </p:column>
-                        <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{participacionController.prepareCreate}" update=":ParticipacionCreateForm" oncomplete="PF('ParticipacionCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ParticipacionViewForm" oncomplete="PF('ParticipacionViewDialog').show()" disabled="#{empty participacionController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ParticipacionEditForm" oncomplete="PF('ParticipacionEditDialog').show()" disabled="#{empty participacionController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{participacionController.destroy}" update=":growl,datalist" disabled="#{empty participacionController.selected}"/>
+                    <p:ajax event="rowSelect" update=":ParticipacionListForm:dataListAsistentes" listener="#{participacionController.cargarParticipaciones(capacitacionController.selected)}"/>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCapacitacionTitle_id}"/>
                         </f:facet>
-                    </p:dataTable>
-                </p:panel>
-            </h:form>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCapacitacionTitle_titulo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.titulo}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCapacitacionTitle_anio}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.anio}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCapacitacionTitle_fechas}"/>
+                        </f:facet>
+                        <p:outputLabel value="#{capacitacionController.convertirListaFechas(item.fechas)}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCapacitacionTitle_cantidadMinimaAsistencia}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cantidadMinimaAsistencia}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Areas"/>
+                        </f:facet>
+                        <h:outputText value="#{capacitacionController.convertirLista(item.areas)}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Destinatarios"/>
+                        </f:facet>
+                        <h:outputText value="#{capacitacionController.convertirLista(item.destinatarios)}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Disertantes"/>
+                        </f:facet>
+                        <h:outputText value="#{capacitacionController.convertirLista(item.disertantes)}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCapacitacionTitle_cantidadHoras}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cantidadHoras}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Habilitada Desde"/>
+                        </f:facet>
+                        <h:outputText value="#{capacitacionController.formatearFecha(item.apertura)}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Habilitada Hasta"/>
+                        </f:facet>
+                        <h:outputText value="#{capacitacionController.formatearFecha(item.cierre)}" />
+                    </p:column>
 
-            <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
-        </ui:define>
-    </ui:composition>
+                </p:dataTable>
+            </p:panel>
 
-</html>
+            <p:panel header="#{bundle.ListParticipacionTitle}">
+                <p:dataTable id="dataListAsistentes" value="#{participacionController.items}" var="item"
+                             selectionMode="single" selection="#{participacionController.selected}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
+
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton guardarButton checkBox"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton guardarButton checkBox"/>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListParticipacionTitle_id}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListParticipacionTitle_capacitacion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.capacitacion}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListParticipacionTitle_participante}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.participante}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListParticipacionTitle_fechaInscripcion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaInscripcion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListParticipacionTitle_fechaAsistencias}"/>
+                        </f:facet>
+                        <p:selectManyCheckbox id="checkBox" value="#{item.fechaAsistencias}" layout="pageDirection" columns="1">
+                            <f:selectItems value="#{capacitacionController.selected.fechas}" var="fech" itemLabel="#{fech}" itemValue="#{fech}" />
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </p:selectManyCheckbox>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListParticipacionTitle_resultado}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.resultado}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListParticipacionTitle_dependencia}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.dependencia}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListParticipacionTitle_certificado}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.certificado}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListParticipacionTitle_cargo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cargo}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Actualizar Fechas"/>
+                        </f:facet>
+                        <p:commandButton id="guardarButton"   icon="ui-icon-disk" value="Guardar" actionListener="#{participacionController.modificarFechasAsistencias()}"  disabled="#{empty participacionController.selected}" />
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{participacionController.prepareCreate}" update=":ParticipacionCreateForm" oncomplete="PF('ParticipacionCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ParticipacionViewForm" oncomplete="PF('ParticipacionViewDialog').show()" disabled="#{empty participacionController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ParticipacionEditForm" oncomplete="PF('ParticipacionEditDialog').show()" disabled="#{empty participacionController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{participacionController.destroy}" update=":growl,dataListAsistentes" disabled="#{empty participacionController.selected}"/>
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+
+        <ui:include src="Create.xhtml"/>
+        <ui:include src="Edit.xhtml"/>
+        <ui:include src="View.xhtml"/>
+    </ui:define>
+</ui:composition>
+

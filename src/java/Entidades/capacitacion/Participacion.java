@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -21,6 +23,10 @@ import javax.persistence.Temporal;
  *
  * @author hugo
  */
+@NamedQueries({
+    @NamedQuery(name = "Participacion.buscarPartDeCapacitacion", query = "SELECT p FROM Participacion p WHERE p.capacitacion=:capacitacion"),
+    })
+
 @Entity
 @Table(name="participacion")
 public class Participacion implements Serializable {

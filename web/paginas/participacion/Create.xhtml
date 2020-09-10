@@ -8,55 +8,51 @@
 
     <ui:composition>
 
-        <p:dialog id="ParticipacionCreateDlg" widgetVar="ParticipacionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateParticipacionTitle}">
+        <p:dialog id="ParticipacionCreateDlg" widgetVar="ParticipacionCreateDialog" modal="true" position="top" resizable="true" height="550" appendTo="@(body)" header="#{bundle.CreateParticipacionTitle}">
             <h:form id="ParticipacionCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{participacionController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateParticipacionLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{participacionController.selected.id}" title="#{bundle.CreateParticipacionTitle_id}" />
-                        <p:outputLabel value="#{bundle.CreateParticipacionLabel_capacitacion}" for="capacitacion" />
-                        <p:selectOneMenu id="capacitacion" value="#{participacionController.selected.capacitacion}" >
-                            <f:selectItems value="#{capacitacionController.itemsAvailableSelectOne}"
-                                           var="capacitacionItem"
-                                           itemValue="#{capacitacionItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateParticipacionLabel_participante}" for="participante" />
-                        <p:selectOneMenu id="participante" value="#{participacionController.selected.participante}" >
-                            <f:selectItems value="#{participanteController.itemsAvailableSelectOne}"
-                                           var="participanteItem"
-                                           itemValue="#{participanteItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateParticipacionLabel_fechaInscripcion}" for="fechaInscripcion" />
-                        <p:calendar id="fechaInscripcion" pattern="MM/dd/yyyy HH:mm:ss" value="#{participacionController.selected.fechaInscripcion}" title="#{bundle.EditParticipacionTitle_fechaInscripcion}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateParticipacionLabel_fechaAsistencias}" for="fechaAsistencias" />
-                        <p:inputText id="fechaAsistencias" value="#{participacionController.selected.fechaAsistencias}" title="#{bundle.CreateParticipacionTitle_fechaAsistencias}" />
-                        <p:outputLabel value="#{bundle.CreateParticipacionLabel_resultado}" for="resultado" />
-                        <p:selectOneMenu id="resultado" value="#{participacionController.selected.resultado}" >
-                            <f:selectItems value="#{resultadoController.itemsAvailableSelectOne}"
-                                           var="resultadoItem"
-                                           itemValue="#{resultadoItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateParticipacionLabel_dependencia}" for="dependencia" />
-                        <p:selectOneMenu id="dependencia" value="#{participacionController.selected.dependencia}" >
-                            <f:selectItems value="#{areaController.itemsAvailableSelectOne}"
-                                           var="dependenciaItem"
-                                           itemValue="#{dependenciaItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateParticipacionLabel_certificado}" for="certificado" />
-                        <p:selectOneMenu id="certificado" value="#{participacionController.selected.certificado}" >
-                            <f:selectItems value="#{certificadoController.itemsAvailableSelectOne}"
-                                           var="certificadoItem"
-                                           itemValue="#{certificadoItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateParticipacionLabel_cargo}" for="cargo" />
-                        <p:selectOneMenu id="cargo" value="#{participacionController.selected.cargo}" >
-                            <f:selectItems value="#{cargoController.itemsAvailableSelectOne}"
-                                           var="cargoItem"
-                                           itemValue="#{cargoItem}"/>
-                        </p:selectOneMenu>
-                    </p:panelGrid>
-                    <p:commandButton actionListener="#{participacionController.create}" value="#{bundle.Save}" update="display,:ParticipacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'ParticipacionCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ParticipacionCreateDialog.hide()"/>
+                    <p:panel id="pPri" header="Datos del Participante" >
+                        <p:panelGrid columns="2" rendered="#{participacionController.selected != null}" styleClass="noBorders">
+                            <p:outputLabel value="#{bundle.CreateParticipacionLabel_capacitacion}"/>
+                            <p:outputLabel value="#{participacionController.selected.capacitacion.titulo}" />
+                            <p:outputLabel value="#{bundle.CreateParticipacionLabel_participante}" for="participante" />
+                            <p:selectOneMenu id="participante" value="#{participacionController.selected.participante}" filter="true" filterMatchMode="startsWith" >
+                                <f:selectItems value="#{participanteController.itemsAvailableSelectOne}"
+                                               var="participanteItem"
+                                               itemValue="#{participanteItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateParticipacionLabel_fechaInscripcion}" for="fechaInscripcion" />
+                            <p:calendar id="fechaInscripcion" pattern="MM/dd/yyyy HH:mm:ss" value="#{participacionController.selected.fechaInscripcion}" title="#{bundle.EditParticipacionTitle_fechaInscripcion}"  showOn="button"/>
+                            <p:outputLabel value="#{bundle.CreateParticipacionLabel_fechaAsistencias}" for="fechaAsistencias" />
+                            <p:inputText id="fechaAsistencias" value="#{participacionController.selected.fechaAsistencias}" title="#{bundle.CreateParticipacionTitle_fechaAsistencias}" />
+                            <p:outputLabel value="#{bundle.CreateParticipacionLabel_resultado}" for="resultado" />
+                            <p:selectOneMenu id="resultado" value="#{participacionController.selected.resultado}" >
+                                <f:selectItems value="#{resultadoController.itemsAvailableSelectOne}"
+                                               var="resultadoItem"
+                                               itemValue="#{resultadoItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateParticipacionLabel_dependencia}" for="dependencia" />
+                            <p:selectOneMenu id="dependencia" value="#{participacionController.selected.dependencia}" >
+                                <f:selectItems value="#{areaController.itemsAvailableSelectOne}"
+                                               var="dependenciaItem"
+                                               itemValue="#{dependenciaItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateParticipacionLabel_certificado}" for="certificado" />
+                            <p:selectOneMenu id="certificado" value="#{participacionController.selected.certificado}" >
+                                <f:selectItems value="#{certificadoController.itemsAvailableSelectOne}"
+                                               var="certificadoItem"
+                                               itemValue="#{certificadoItem}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.CreateParticipacionLabel_cargo}" for="cargo" />
+                            <p:selectOneMenu id="cargo" value="#{participacionController.selected.cargo}" >
+                                <f:selectItems value="#{cargoController.itemsAvailableSelectOne}"
+                                               var="cargoItem"
+                                               itemValue="#{cargoItem}"/>
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+                        </p:panel>
+                        <p:commandButton actionListener="#{participacionController.create}" value="#{bundle.Save}" update="display,:ParticipacionListForm:datalist,:growl" oncomplete="handleSubmit(args,'ParticipacionCreateDialog');"/>
+                        <p:commandButton value="#{bundle.Cancel}" onclick="ParticipacionCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

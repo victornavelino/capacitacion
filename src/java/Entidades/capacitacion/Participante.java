@@ -68,7 +68,7 @@ public class Participante implements Serializable {
 
     @Override
     public String toString() {
-        return "capacitacion.Participante[ id=" + id + " ]";
+        return this.getPersona().toString();
     }
     
 }
