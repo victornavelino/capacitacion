@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../../Templates/publicTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                >
+    <ui:define name="content">
+
+
+        <h3>
+            <h:outputText value="CAPACITACIONES ABIERTAS PARA INSCRIPCION"></h:outputText>
+        </h3>
+
+        
+            <p:panel header="#{bundle.ListCapacitacionTitle}">
+                <p:dataTable id="datalist" value="#{capacitacionController.items}" var="item"
+                             selectionMode="single" selection="#{capacitacionController.selected}"
+                             paginator="true"
+                             rowKey="#{item.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             >
+
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCapacitacionTitle_titulo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.titulo}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Informacion"/>
+                        </f:facet>
+                        <h:outputText value="#{item.informacionAlPublico}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCapacitacionTitle_fechas}"/>
+                        </f:facet>
+                        <p:outputLabel value="#{capacitacionController.convertirListaFechas(item.fechas)}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Disertantes"/>
+                        </f:facet>
+                        <h:outputText value="#{capacitacionController.convertirLista(item.disertantes)}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCapacitacionTitle_cantidadHoras}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cantidadHoras}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Lugar"/>
+                        </f:facet>
+                        <h:outputText value="#{item.lugar}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Inscripcion"/>
+                        </f:facet>
+                        <p:commandButton id="habilitarButton"   icon="ui-icon-pencil" value="Inscribirse" />
+                    </p:column>
+
+
+
+                </p:dataTable>
+            </p:panel>
+       
+
+
+    </ui:define>
+</ui:composition>

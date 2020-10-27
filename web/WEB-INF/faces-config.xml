@@ -12,5 +12,9 @@
             <base-name>/BundleUsuario</base-name>
             <var>bundleUsuario</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/BundleTipoCapacitacion</base-name>
+            <var>bundleTipoCapacitacion</var>
+        </resource-bundle>
     </application>
 </faces-config>

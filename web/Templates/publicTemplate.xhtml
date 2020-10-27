@@ -10,7 +10,7 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
-        <!--<h:outputStylesheet library="css" name="personalizado.css"/>-->
+        <h:outputStylesheet library="css" name="personalizado.css"/>
 
         <h:outputScript library="js" name="jsfcrud.js"/>
         <title>Direccion de Capacitacion y Perfeccionamiento</title>
@@ -117,32 +117,22 @@
     <h:body>
 
         <f:view contentType="text/html">
-            <f:event type="preRenderView" listener="#{usuarioLogerBean.navigationStatus()}" />
-
-            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-
-            <p:dialog modal="true" widgetVar="statusDialog" header="Estado"   
-                      draggable="false" closable="true" position="top">  
-                <p:graphicImage value="/Imagenes/load.gif" />  
-            </p:dialog>  
-            <p:growl id="growl" life="3000" />
-
-            <h:form id="frmPri" enctype="multipart/form-data">
-
-                <ui:include src="dialogosSesion.xhtml"/>
+            <h:form id="frmPublic" enctype="multipart/form-data">
 
 
-                <ui:include src="menu.xhtml"/>
+                <ui:include src="capacitaciones.xhtml"/>
 
-                <b:panel>
-                    <ui:insert name="content">Content</ui:insert>
-                </b:panel>
-                <b:navBar>
-                    <b:navbarLinks pull="left"><img src="#{request.contextPath}/Imagenes/logoUnca.png" alt="" height="70px" align="left" />
-                    </b:navbarLinks>   <b:navbarLinks pull="right"><p> Direccion de Capacitacion y Perfeccionamiento <br/>Ayacucho 741 
-                            <br/> Casa Vicerectorado - UNCa </p></b:navbarLinks> 
-                </b:navBar>
             </h:form>
+            <p:growl id="growl" widgetVar="growl" life="3000" />
+
+            <b:panel>
+                <ui:insert name="content">Content</ui:insert>
+            </b:panel>
+            <b:navBar>
+                <b:navbarLinks pull="left"><img src="#{request.contextPath}/Imagenes/logoUnca.png" alt="" height="70px" align="left" />
+                </b:navbarLinks>   <b:navbarLinks pull="right"><p> Direccion de Capacitacion y Perfeccionamiento <br/>Ayacucho 741 
+                        <br/> Casa Vicerectorado - UNCa</p></b:navbarLinks> 
+            </b:navBar>
         </f:view>
     </h:body>
 

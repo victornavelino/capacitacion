@@ -22,7 +22,7 @@ import javax.persistence.Temporal;
  * @author hugo
  */
 @Entity
-@Table(name="capacitacion" )
+@Table(name = "capacitacion")
 public class Capacitacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -31,10 +31,15 @@ public class Capacitacion implements Serializable {
     private Long id;
     @Lob
     private String titulo;
+    @Lob
+    private String objetivo;
+    @Lob
+    private String informacionAlPublico;
     private int anio;
     private List<Date> fechas;
     private int cantidadMinimaAsistencia;
     private int cantidadHoras;
+    private String lugar;
     @OneToMany
     private List<Area> areas;
     @OneToMany
@@ -46,8 +51,9 @@ public class Capacitacion implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date cierre;
     private Boolean habilitada;
+    @Lob
+    private String observaciones;
     
-
     public Long getId() {
         return id;
     }
@@ -62,6 +68,22 @@ public class Capacitacion implements Serializable {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getObjetivo() {
+        return objetivo;
+    }
+
+    public void setObjetivo(String objetivo) {
+        this.objetivo = objetivo;
+    }
+
+    public String getInformacionAlPublico() {
+        return informacionAlPublico;
+    }
+
+    public void setInformacionAlPublico(String informacionAlPublico) {
+        this.informacionAlPublico = informacionAlPublico;
     }
 
     public int getAnio() {
@@ -94,6 +116,14 @@ public class Capacitacion implements Serializable {
 
     public void setCantidadHoras(int cantidadHoras) {
         this.cantidadHoras = cantidadHoras;
+    }
+
+    public String getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
     }
 
     public List<Area> getAreas() {
@@ -144,6 +174,14 @@ public class Capacitacion implements Serializable {
         this.habilitada = habilitada;
     }
 
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -168,5 +206,5 @@ public class Capacitacion implements Serializable {
     public String toString() {
         return "capacitacion.Capacitacion[ id=" + id + " ]";
     }
-    
+
 }
