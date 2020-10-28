@@ -2,7 +2,7 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition  xmlns="http://www.w3.org/1999/xhtml"
                  xmlns:ui="http://java.sun.com/jsf/facelets"
-                 template="/Templates/publicTemplate.xhtml"
+                 template="./Templates/publicTemplate.xhtml"
                  xmlns:p="http://primefaces.org/ui"
                  xmlns:b="http://bootsfaces.net/ui"
                  xmlns:h="http://java.sun.com/jsf/html"
@@ -42,7 +42,7 @@
                         <f:facet name="header">
                             <h:outputText value="Inscripcion"/>
                         </f:facet>
-                        <p:commandButton id="btnNuevaInscripcion" icon="ui-icon-plus"   value="Inscribirse" actionListener="#{participacionController.prepareCreate}" oncomplete="PF('InscripcionCreateDialog').show()"/>
+                        <p:commandButton id="btnNuevaInscripcion" icon="ui-icon-plus"   value="Inscribirse" actionListener="#{participacionController.prepareCreate}" update=":InscripcionCreateForm" oncomplete="PF('InscripcionCreateDialog').show()"/>
                     </p:column>
 
 

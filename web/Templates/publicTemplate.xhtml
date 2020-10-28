@@ -27,21 +27,22 @@
 
             <h:form id="frmPublic" enctype="multipart/form-data">
                 <div align="center">
-                   <img src="#{request.contextPath}/Imagenes/logoUnca.png" alt="" height="70px"/>
-                   <h3>Direccion de Capacitacion y Perfeccionamiento</h3>
+                    <img src="#{request.contextPath}/Imagenes/logoUnca.png" alt="" height="70px"/>
+                    <h3>Direccion de Capacitacion y Perfeccionamiento</h3>
                 </div>
-                
+
                 <br/><br/>
                 <p:growl id="growlPublic" widgetVar="growlPublic" life="3000" />
-                <b:panel>
-                    <ui:insert name="content">Content</ui:insert>
-                </b:panel>
-                <b:navBar>
-                    <b:navbarLinks pull="left"><img src="#{request.contextPath}/Imagenes/logoUnca.png" alt="" height="70px" align="left" />
-                    </b:navbarLinks>   <b:navbarLinks pull="right"><p> Direccion de Capacitacion y Perfeccionamiento <br/>Ayacucho 741 
-                            <br/> Casa Vicerectorado - UNCa </p></b:navbarLinks> 
-                </b:navBar>
             </h:form>
+            <b:panel>
+                <ui:insert name="content">Content</ui:insert>
+            </b:panel>
+            <b:navBar>
+                <b:navbarLinks pull="left"><img src="#{request.contextPath}/Imagenes/logoUnca.png" alt="" height="70px" align="left" />
+                </b:navbarLinks>   <b:navbarLinks pull="right"><p> Direccion de Capacitacion y Perfeccionamiento <br/>Ayacucho 741 
+                        <br/> Casa Vicerectorado - UNCa </p></b:navbarLinks> 
+            </b:navBar>
+
 
         </f:view>
     </h:body>
