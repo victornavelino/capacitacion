@@ -10,59 +10,48 @@
 
 
     <ui:define name="content">
-
-        <p:panel header="CAPACITACIONES ABIERTAS">
-            <p:dataTable id="datalist" value="#{capacitacionController.items}" var="item"
-                         >
-
-
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="#{bundle.ListCapacitacionTitle_titulo}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.titulo}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Informacion"/>
-                    </f:facet>
-                    <h:outputText value="#{item.informacionAlPublico}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="#{bundle.ListCapacitacionTitle_fechas}"/>
-                    </f:facet>
-                    <p:outputLabel value="#{capacitacionController.convertirListaFechas(item.fechas)}" />
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Disertantes"/>
-                    </f:facet>
-                    <h:outputText value="#{capacitacionController.convertirLista(item.disertantes)}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="#{bundle.ListCapacitacionTitle_cantidadHoras}"/>
-                    </f:facet>
-                    <h:outputText value="#{item.cantidadHoras}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Lugar"/>
-                    </f:facet>
-                    <h:outputText value="#{item.lugar}"/>
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Inscripcion"/>
-                    </f:facet>
-                    <p:commandButton id="habilitarButton"   icon="ui-icon-pencil" value="Inscribirse" />
-                </p:column>
+        <h:form id="IncripcionListForm">
+            <p:panel header="CAPACITACIONES ABIERTAS">
+                <p:dataTable id="datalist" value="#{capacitacionController.items}" var="item"
+                             >
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCapacitacionTitle_titulo}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.titulo}"/>
+                    </p:column>
+                    <p:column colspan="3">
+                        <f:facet name="header">
+                            <h:outputText value="Informacion"/>
+                        </f:facet>
+                        <h:outputText value="#{item.informacionAlPublico}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCapacitacionTitle_fechas}"/>
+                        </f:facet>
+                        <p:outputLabel value="#{capacitacionController.convertirListaFechas(item.fechas)}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Lugar"/>
+                        </f:facet>
+                        <h:outputText value="#{item.lugar}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Inscripcion"/>
+                        </f:facet>
+                        <p:commandButton id="btnNuevaInscripcion" icon="ui-icon-plus"   value="Inscribirse" actionListener="#{participacionController.prepareCreate}" oncomplete="PF('InscripcionCreateDialog').show()"/>
+                    </p:column>
 
 
 
-            </p:dataTable>
+                </p:dataTable>
 
-        </p:panel>
+            </p:panel>
+
+        </h:form>
+        <ui:include src="inscripcion.xhtml"/>
     </ui:define>
 </ui:composition>

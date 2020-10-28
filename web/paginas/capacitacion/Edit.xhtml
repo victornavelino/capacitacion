@@ -19,6 +19,8 @@
                             <p:inputText id="titulo" value="#{capacitacionController.selected.titulo}" title="#{bundle.CreateCapacitacionTitle_titulo}" size="150" maxlength="300" />
                             <p:outputLabel value="Objetivo" for="objetivo" />
                             <p:inputTextarea id="objetivo" value="#{capacitacionController.selected.objetivo}" cols="120"/>
+                            <p:outputLabel value="Informacion al Publico (Se muestra en el Formulario de Inscripcion)" for="informacionPublica" />
+                            <p:inputTextarea id="informacionPublica" value="#{capacitacionController.selected.informacionAlPublico}" cols="120"/>
                             <p:outputLabel value="#{bundle.CreateCapacitacionLabel_anio}" for="anio" />
                             <p:spinner id="anio" value="#{capacitacionController.selected.anio}" maxlength="4" min="2019" title="#{bundle.CreateCapacitacionTitle_anio}" />
                             <p:outputLabel value="Areas" for="pickListAreas" />
@@ -67,6 +69,8 @@
                             <p:outputLabel value="#{bundle.CreateCapacitacionLabel_cantidadHoras}" for="cantidadHoras" />
                             <p:spinner id="cantidadHoras" value="#{capacitacionController.selected.cantidadHoras}" 
                                        title="#{bundle.CreateCapacitacionTitle_cantidadHoras}" maxlength="2" min="0"/>
+                            <p:outputLabel value="Lugar de la Capacitacion" for="lugar" />
+                            <p:inputText id="lugar" value="#{capacitacionController.selected.lugar}" title="Lugar" size="150" maxlength="300" />
                             <p:outputLabel value="Observaciones" for="observaciones" />
                             <p:inputTextarea id="observaciones" value="#{capacitacionController.selected.observaciones}" cols="120"/>
                         </p:panelGrid>
