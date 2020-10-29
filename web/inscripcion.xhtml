@@ -8,9 +8,12 @@
 
     <ui:composition>
 
-        <p:dialog id="InscripcionCreateDialog" widgetVar="InscripcionCreateDialog" modal="true" position="top" resizable="true" height="550" appendTo="@(body)" header="#{bundle.CreateParticipacionTitle}">
+        <p:dialog id="InscripcionCreateDialog" widgetVar="InscripcionCreateDialog" modal="true" position="top" resizable="true" height="550" width="700" appendTo="@(body)" header="#{bundle.CreateParticipacionTitle}">
             <h:form id="InscripcionCreateForm">
                 <h:panelGroup id="display">
+                    <div align="center">
+                        <img src="#{request.contextPath}/Imagenes/logounca2.png" alt="" height="100px"/>
+                    </div>
                     <p:panel id="pPri" header="Inscripcion" >
                         <p:growl id="msg" showDetail="true" escape="false" />
                         <p:panelGrid columns="2" rendered="#{participacionController.selected != null}" styleClass="noBorders">

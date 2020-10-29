@@ -48,7 +48,7 @@
             <b:navbarLinks pull="right"> 
                 <b:iconAwesome name="user" size="3x"></b:iconAwesome>
                 <b:dropMenu  value="Bienvenido #{usuarioLogerBean.usuario.nombre}" >  
-                    <b:navLink  value="Cerrar Sesión" href="logout.xhtml" iconAwesome="sign-out" ></b:navLink>                               
+                    <b:navLink  value="Cerrar Sesión" href="login.xhtml" action="#{sessionControlerBean.cerrarSession()}" iconAwesome="sign-out" ></b:navLink>                               
                 </b:dropMenu> 
             </b:navbarLinks>
 
