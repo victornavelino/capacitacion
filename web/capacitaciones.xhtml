@@ -13,7 +13,11 @@
         <h:form id="IncripcionListForm">
             <p:panel header="CAPACITACIONES ABIERTAS">
                 <p:dataTable id="datalist" value="#{capacitacionController.items}" var="item"
+                             selectionMode="single" selection="#{capacitacionController.selected}"
+                             rowKey="#{item.id}"
                              >
+                    <p:ajax event="rowSelect" update="btnNuevaInscripcion"/>
+                    <p:ajax event="rowUnselect" update="btnNuevaInscripcion"/>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="#{bundle.ListCapacitacionTitle_titulo}"/>
@@ -42,7 +46,7 @@
                         <f:facet name="header">
                             <h:outputText value="Inscripcion"/>
                         </f:facet>
-                        <p:commandButton id="btnNuevaInscripcion" icon="ui-icon-plus"   value="Inscribirse" actionListener="#{participacionController.prepareCreate}" update=":InscripcionCreateForm" oncomplete="PF('InscripcionCreateDialog').show()"/>
+                        <p:commandButton id="btnNuevaInscripcion" icon="ui-icon-plus" disabled="#{empty capacitacionController.selected}" value="Inscribirse" actionListener="#{participacionController.prepararIncripcion(item)}" update=":InscripcionCreateForm" oncomplete="PF('InscripcionCreateDialog').show()"/>
                     </p:column>
 
 

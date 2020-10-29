@@ -81,6 +81,13 @@ public class ParticipacionController implements Serializable {
         return selected;
     }
 
+    public Participacion prepararIncripcion(Capacitacion capacitacion) {
+        selected = new Participacion();
+        selected.setCapacitacion(capacitacion);
+        initializeEmbeddableKey();
+        return selected;
+    }
+
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ParticipacionCreated"));
         if (!JsfUtil.isValidationFailed()) {

@@ -40,6 +40,16 @@ public class CapacitacionController implements Serializable {
     private DualListModel<String> listaPickAreas;
     @Inject
     private PickListView pickListView;
+    private boolean botonHabilitado;
+
+    public boolean isBotonHabilitado() {
+        return botonHabilitado;
+    }
+
+    public void setBotonHabilitado(boolean botonHabilitado) {
+        this.botonHabilitado = botonHabilitado;
+    }
+
 
     public CapacitacionController() {
     }
@@ -73,6 +83,7 @@ public class CapacitacionController implements Serializable {
     public Capacitacion prepareCreate() {
         selected = new Capacitacion();
         this.getPickListView().init();
+        this.setBotonHabilitado(false);
         initializeEmbeddableKey();
         return selected;
     }
@@ -241,8 +252,9 @@ public class CapacitacionController implements Serializable {
         } catch (Exception e) {
          return "";
         }
-       
-               
+    }
+    public void habilitarBoton(boolean estado){
+        this.setBotonHabilitado(estado);
     }
 
 }
