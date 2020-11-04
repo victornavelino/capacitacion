@@ -8,15 +8,15 @@
 
     <ui:composition>
 
-        <p:dialog id="InscripcionCreateDialog" widgetVar="InscripcionCreateDialog" modal="true" position="top" resizable="true" height="550" width="700" appendTo="@(body)" header="#{bundle.CreateParticipacionTitle}">
+        <p:dialog id="InscripcionCreateDialog" widgetVar="InscripcionCreateDialog" modal="true" position="top" resizable="true" height="550" width="700" appendTo="@(body)" >
             <h:form id="InscripcionCreateForm">
                 <h:panelGroup id="display">
-                    <div align="center" style="background-color: activeborder">
-                        <img src="#{request.contextPath}/Imagenes/logounca2.png" alt="" height="100px"/>
+                    <div align="center" style="background-color: 0193CF">
+                        <img src="#{request.contextPath}/Imagenes/logounca2.png" alt="" height="100px" style="background-color: #0193CF"/>
                     </div>
-                    <p:panel id="pPri" header="Inscripcion" >
-                        <p:growl id="msg" showDetail="true" escape="false" />
-                        <p:panelGrid columns="2" rendered="#{participacionController.selected != null}" styleClass="noBorders">
+                    <p:panel id="pPri" header="Datos de la Inscripcion" >
+                       <p:panelGrid columns="2" rendered="#{participacionController.selected != null}" styleClass="noBorders">
+                            
                             <p:outputLabel value="Capa"/>
                             <p:outputLabel value="#{participacionController.selected.capacitacion.observaciones}" />
                             <p:outputLabel value="#{bundle.CreateParticipacionLabel_participante}" for="participante" />
@@ -27,7 +27,7 @@
                             </p:selectOneMenu>
                         </p:panelGrid>
                     </p:panel>
-                    <p:commandButton actionListener="#{participacionController.create}" value="#{bundle.Save}" update="display" oncomplete="handleSubmit(args,'InscripcionCreateDialog');"/>
+                    <p:commandButton actionListener="#{participacionController.create}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'InscripcionCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="InscripcionCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
