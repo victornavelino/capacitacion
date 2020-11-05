@@ -17,10 +17,11 @@
                     <p:panel id="pPri" header="Datos de la Inscripcion" >
                        <p:panelGrid columns="2" rendered="#{participacionController.selected != null}" styleClass="noBorders">
                             
-                            <p:outputLabel value="Capa"/>
-                            <p:outputLabel value="#{participacionController.selected.capacitacion.observaciones}" />
-                            <p:outputLabel value="#{bundle.CreateParticipacionLabel_participante}" for="participante" />
-                            <p:selectOneMenu id="participante" value="#{participacionController.selected.participante}" filter="true" filterMatchMode="startsWith" >
+                            <p:outputLabel value="Capacitacion"/>
+                            <p:outputLabel value="#{participacionController.selected.capacitacion.titulo}" />
+                            <p:outputLabel value="Buscar" for="participante" />
+                            <p:inputText id="iTextBuscarParticipante" value="#{participacionController.selected.participante}"  size="20" maxlength="8" placeholder="Ingrese su DNI"/>
+                            <p:selectOneMenu id="participante" value="#{participacionController.selected.participante}" filter="true" filterMatchMode="startsWith" dynamic="false">
                                 <f:selectItems value="#{participanteController.itemsAvailableSelectOne}"
                                                var="participanteItem"
                                                itemValue="#{participanteItem}"/>
