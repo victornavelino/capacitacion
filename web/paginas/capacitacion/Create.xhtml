@@ -16,15 +16,15 @@
                         <p:panelGrid columns="2" rendered="#{capacitacionController.selected != null}" styleClass="noBorders">
 
                             <p:outputLabel value="#{bundle.CreateCapacitacionLabel_titulo}" for="titulo" />
-                            <p:inputText id="titulo" value="#{capacitacionController.selected.titulo}" title="#{bundle.CreateCapacitacionTitle_titulo}" size="150" maxlength="300" />
+                            <p:inputText id="titulo" value="#{capacitacionController.selected.titulo}" title="#{bundle.CreateCapacitacionTitle_titulo}" size="150" maxlength="300" required="true"/>
                             <p:outputLabel value="Objetivo" for="objetivo" />
-                            <p:inputTextarea id="objetivo" value="#{capacitacionController.selected.objetivo}" cols="120"/>
+                            <p:inputTextarea id="objetivo" value="#{capacitacionController.selected.objetivo}" cols="120" required="true"/>
                             <p:outputLabel value="Informacion al Publico (Se muestra en el Formulario de Inscripcion)" for="informacionPublica" />
-                            <p:inputTextarea id="informacionPublica" value="#{capacitacionController.selected.informacionAlPublico}" cols="120"/>
+                            <p:inputTextarea id="informacionPublica" value="#{capacitacionController.selected.informacionAlPublico}" cols="120" required="true"/>
                             <p:outputLabel value="#{bundle.CreateCapacitacionLabel_anio}" for="anio" />
-                            <p:spinner id="anio" value="#{capacitacionController.selected.anio}" maxlength="4" min="2019" title="#{bundle.CreateCapacitacionTitle_anio}" />
+                            <p:spinner id="anio" value="#{capacitacionController.selected.anio}" maxlength="4" min="2019" title="#{bundle.CreateCapacitacionTitle_anio}" required="true"/>
                             <p:outputLabel value="Areas" for="pickListAreas" />
-                            <p:pickList id="pickListAreas" value="#{pickListView.areaDualListModel}" var="area"
+                            <p:pickList id="pickListAreas" value="#{pickListView.areaDualListModel}" var="area" required="true"
                                         itemValue="#{area}" itemLabel="#{area}" 
                                         showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains"  converter="ConversorGenerico">
 
@@ -36,7 +36,7 @@
                             </p:pickList>
 
                             <p:outputLabel value="Destinatario" for="pickListDestinatario" />
-                            <p:pickList id="pickListDestinatario" value="#{pickListView.destDualListModel}" var="destinatario"
+                            <p:pickList id="pickListDestinatario" value="#{pickListView.destDualListModel}" var="destinatario" required="true"
                                         itemValue="#{destinatario}" itemLabel="#{destinatario}" 
                                         showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains"  converter="ConversorGenerico">
 
@@ -48,7 +48,7 @@
                             </p:pickList>
 
                             <p:outputLabel value="Disertantes" for="pickListDisertante" />
-                            <p:pickList id="pickListDisertante" value="#{pickListView.disertDualListModel}" var="disertante"
+                            <p:pickList id="pickListDisertante" value="#{pickListView.disertDualListModel}" var="disertante" required="true"
                                         itemValue="#{disertante}" itemLabel="#{disertante}" 
                                         showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains"  converter="ConversorGenerico">
 
@@ -60,7 +60,7 @@
                             </p:pickList>
 
                             <p:outputLabel for="multiselect" value="Fechas Capacitacion:" />
-                            <p:datePicker id="multiselect" selectionMode="multiple" value="#{capacitacionController.selected.fechas}" pattern="dd/MM/yyyy" readonlyInput="true" size="150" maxlength="300"/>
+                            <p:datePicker id="multiselect" selectionMode="multiple" value="#{capacitacionController.selected.fechas}" pattern="dd/MM/yyyy" readonlyInput="true" size="150" maxlength="300" required="true"/>
 
                             <p:outputLabel value="#{bundle.CreateCapacitacionLabel_cantidadMinimaAsistencia}" for="cantidadMinimaAsistencia" />
                             <p:spinner id="cantidadMinimaAsistencia" value="#{capacitacionController.selected.cantidadMinimaAsistencia}" 
@@ -70,7 +70,7 @@
                             <p:spinner id="cantidadHoras" value="#{capacitacionController.selected.cantidadHoras}" 
                                        title="#{bundle.CreateCapacitacionTitle_cantidadHoras}" maxlength="2" min="0"/>
                             <p:outputLabel value="Lugar de la Capacitacion" for="lugar" />
-                            <p:inputText id="lugar" value="#{capacitacionController.selected.lugar}" title="Lugar" size="150" maxlength="300" />
+                            <p:inputText id="lugar" value="#{capacitacionController.selected.lugar}" title="Lugar" size="150" maxlength="300" required="true"/>
                             <p:outputLabel value="Observaciones" for="observaciones" />
                             <p:inputTextarea id="observaciones" value="#{capacitacionController.selected.observaciones}" cols="120"/>
                         </p:panelGrid>

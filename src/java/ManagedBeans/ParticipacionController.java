@@ -2,6 +2,10 @@ package ManagedBeans;
 
 import Entidades.capacitacion.Capacitacion;
 import Entidades.capacitacion.Participacion;
+import Entidades.capacitacion.Participante;
+import Entidades.persona.DocumentoIdentidad;
+import Entidades.persona.Persona;
+import Entidades.persona.TipoDocumento;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.ParticipacionFacade;
@@ -36,6 +40,7 @@ public class ParticipacionController implements Serializable {
     private CapacitacionController capacitacionController;
     @Inject
     private CheckBoxView checkBoxView;
+    private TipoDocumento tipoDocumento;
 
     public ParticipacionController() {
     }
@@ -74,6 +79,14 @@ public class ParticipacionController implements Serializable {
         return ejbFacade;
     }
 
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+  
     public Participacion prepareCreate() {
         selected = new Participacion();
         selected.setCapacitacion(capacitacionController.getSelected());
@@ -84,6 +97,9 @@ public class ParticipacionController implements Serializable {
     public Participacion prepararIncripcion(Capacitacion capacitacion) {
         selected = new Participacion();
         selected.setCapacitacion(capacitacion);
+        this.tipoDocumento =new TipoDocumento();
+        Participante participante= new Participante();
+        selected.setParticipante(participante);
         initializeEmbeddableKey();
         return selected;
     }
