@@ -10,6 +10,7 @@ import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.ParticipacionFacade;
 import RN.ParticipacionRNLocal;
+import RN.ParticipanteRNLocal;
 
 import java.io.Serializable;
 import java.util.List;
@@ -25,6 +26,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
+import org.primefaces.PrimeFaces;
 
 @Named("participacionController")
 @SessionScoped
@@ -41,6 +43,10 @@ public class ParticipacionController implements Serializable {
     @Inject
     private CheckBoxView checkBoxView;
     private TipoDocumento tipoDocumento;
+    private Long textoBusquedaDNI;
+    private Participante participante;
+    @EJB
+    private ParticipanteRNLocal participanteRNLocal;
 
     public ParticipacionController() {
     }
@@ -86,7 +92,23 @@ public class ParticipacionController implements Serializable {
     public void setTipoDocumento(TipoDocumento tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
-  
+
+    public Long getTextoBusquedaDNI() {
+        return textoBusquedaDNI;
+    }
+
+    public void setTextoBusquedaDNI(Long textoBusquedaDNI) {
+        this.textoBusquedaDNI = textoBusquedaDNI;
+    }
+
+    public Participante getParticipante() {
+        return participante;
+    }
+
+    public void setParticipante(Participante participante) {
+        this.participante = participante;
+    }
+
     public Participacion prepareCreate() {
         selected = new Participacion();
         selected.setCapacitacion(capacitacionController.getSelected());
@@ -95,10 +117,11 @@ public class ParticipacionController implements Serializable {
     }
 
     public Participacion prepararIncripcion(Capacitacion capacitacion) {
+        textoBusquedaDNI = null;
         selected = new Participacion();
         selected.setCapacitacion(capacitacion);
-        this.tipoDocumento =new TipoDocumento();
-        Participante participante= new Participante();
+        this.tipoDocumento = new TipoDocumento();
+        participante = new Participante();
         selected.setParticipante(participante);
         initializeEmbeddableKey();
         return selected;
@@ -142,6 +165,12 @@ public class ParticipacionController implements Serializable {
         System.err.println("capacitacion elegida: ---" + capacitacion);
         items = participacionRNLocal.buscarPartDeCapacitacion(capacitacion);
         System.err.println("lista busqueda: -- " + items);
+    }
+
+    public void buscarPersona() {
+        participante=participanteRNLocal.buscarParticipante(textoBusquedaDNI);
+        selected.setParticipante(participante);
+        PrimeFaces.current().ajax().update(":itNombre");
     }
 
     private void persist(PersistAction persistAction, String successMessage) {

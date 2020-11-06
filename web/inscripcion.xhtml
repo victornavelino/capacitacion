@@ -19,10 +19,10 @@
 
                             <p:outputLabel value="Capacitacion"/>
                             <p:outputLabel value="#{participacionController.selected.capacitacion.titulo}" />
-                            <p:outputLabel value="Buscar" for="participante" />
+                            <p:outputLabel value="Buscar" for="iTextBuscarParticipante" />
                             <h:panelGroup> 
-                                <p:inputText id="iTextBuscarParticipante" value="#{participacionController.selected.participante}"  size="20" maxlength="8" placeholder="Ingrese su DNI"/>
-                                <p:commandButton id="btnBuscar" icon="ui-icon-search"/>
+                                <p:inputText id="iTextBuscarParticipante" value="#{participacionController.textoBusquedaDNI}"  size="20" maxlength="8" placeholder="Ingrese su DNI"/>
+                                <p:commandButton id="btnBuscar" icon="ui-icon-search" actionListener="#{participacionController.buscarPersona()}"/>
                             </h:panelGroup>
                             <p:outputLabel value="Nombre: " for="itNombre" />
                             <p:inputText id="itNombre" 
@@ -39,7 +39,7 @@
                                          size="50"
                                          maxlength="100"
                                          required="true"/>
-                            
+
                             <p:outputLabel value="Tipo de Documento" for="tipoDocumento" />
                             <p:selectOneMenu id="tipoDocumento" value="#{participacionController.tipoDocumento}" 
                                              style="width: 150px" filter="true" filterMatchMode="startsWith">
@@ -50,13 +50,14 @@
 
                             <p:outputLabel value="Numero Documento" for="numero" />
                             <p:inputText id="numero" value="#{participacionController.selected.participante.persona.documentoIdentidad.numero}" title="#{bundle.CreateDocumentoIdentidadTitle_numero}" required="true"/>
-                            
-                            <p:outputLabel value="Participante" for="participante" />
-                            <p:selectOneMenu id="participante" value="#{participacionController.selected.participante}" filter="true" filterMatchMode="startsWith">
-                                <f:selectItems value="#{participanteController.itemsAvailableSelectOne}"
-                                               var="participanteItem"
-                                               itemValue="#{participanteItem}"/>
+
+                            <p:outputLabel value="#{bundle.CreateParticipacionLabel_dependencia}" for="dependencia" />
+                            <p:selectOneMenu id="dependencia" value="#{participacionController.selected.dependencia}" filter="true" filterMatchMode="startsWith" required="true">
+                                <f:selectItems value="#{areaController.itemsAvailableSelectOne}"
+                                               var="dependenciaItem"
+                                               itemValue="#{dependenciaItem}"/>
                             </p:selectOneMenu>
+
                         </p:panelGrid>
                     </p:panel>
                     <p:commandButton actionListener="#{participacionController.create}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'InscripcionCreateDialog');"/>
