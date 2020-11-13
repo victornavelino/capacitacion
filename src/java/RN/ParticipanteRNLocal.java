@@ -24,5 +24,4 @@ public interface ParticipanteRNLocal {
 
     public List<Participante> findAll() throws Exception;
 
-    public Participante buscarParticipante(Long dni);
-}
+ }

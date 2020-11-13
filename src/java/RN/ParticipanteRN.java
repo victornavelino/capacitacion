@@ -48,18 +48,7 @@ public class ParticipanteRN implements ParticipanteRNLocal {
         return participanteFacade.findAll();
     }
 
-    @Override
-    public Participante buscarParticipante(Long dni) {
-        Query q = null;
-        q = em.createNamedQuery("Participante.buscarParticipante");
-        q.setParameter("dni", dni);
-        if (q.getSingleResult() != null) {
-            return (Participante) q.getSingleResult();
-        } else {
-            return new Participante();
-        }
 
-    }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

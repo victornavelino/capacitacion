@@ -34,6 +34,10 @@ public class Participante implements Serializable {
     private Long id;
     @OneToOne
     private Persona persona;
+    @OneToOne
+    private Cargo cargo;
+    @OneToOne
+    private Area area;
     
 
     public Long getId() {
@@ -50,6 +54,22 @@ public class Participante implements Serializable {
 
     public void setPersona(Persona persona) {
         this.persona = persona;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
+    }
+
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
     }
     
     @Override

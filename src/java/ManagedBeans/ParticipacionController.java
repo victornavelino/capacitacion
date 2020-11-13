@@ -3,16 +3,19 @@ package ManagedBeans;
 import Entidades.capacitacion.Capacitacion;
 import Entidades.capacitacion.Participacion;
 import Entidades.capacitacion.Participante;
+import Entidades.persona.CorreoElectronico;
 import Entidades.persona.DocumentoIdentidad;
 import Entidades.persona.Persona;
 import Entidades.persona.TipoDocumento;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
 import Facades.ParticipacionFacade;
+import Facades.ParticipanteFacade;
 import RN.ParticipacionRNLocal;
 import RN.ParticipanteRNLocal;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -21,6 +24,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -44,9 +48,15 @@ public class ParticipacionController implements Serializable {
     private CheckBoxView checkBoxView;
     private TipoDocumento tipoDocumento;
     private Long textoBusquedaDNI;
+    private String textoDNI;
     private Participante participante;
     @EJB
     private ParticipanteRNLocal participanteRNLocal;
+    private Persona persona;
+    private DocumentoIdentidad documentoIdentidad;
+    @EJB
+    private ParticipanteFacade participanteFacade;
+    private CorreoElectronico correoElectronico;
 
     public ParticipacionController() {
     }
@@ -109,6 +119,14 @@ public class ParticipacionController implements Serializable {
         this.participante = participante;
     }
 
+    public String getTextoDNI() {
+        return textoDNI;
+    }
+
+    public void setTextoDNI(String textoDNI) {
+        this.textoDNI = textoDNI;
+    }
+
     public Participacion prepareCreate() {
         selected = new Participacion();
         selected.setCapacitacion(capacitacionController.getSelected());
@@ -118,16 +136,30 @@ public class ParticipacionController implements Serializable {
 
     public Participacion prepararIncripcion(Capacitacion capacitacion) {
         textoBusquedaDNI = null;
+        textoDNI = "";
         selected = new Participacion();
         selected.setCapacitacion(capacitacion);
-        this.tipoDocumento = new TipoDocumento();
+        //this.tipoDocumento = new TipoDocumento();
+        documentoIdentidad = new DocumentoIdentidad();
+        correoElectronico = new CorreoElectronico();
+        correoElectronico.setDireccion(" ");
+        //documentoIdentidad.setTipoDocumento(tipoDocumento);
+        //documentoIdentidad.setNumero(0);
+
         participante = new Participante();
+        persona = new Persona();
+        persona.setDocumentoIdentidad(documentoIdentidad);
+        persona.setCorreosElectronico(correoElectronico);
+        persona.setNombre(" ");
+        persona.setApellido(" ");
+        participante.setPersona(persona);
         selected.setParticipante(participante);
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
+        selected.setFechaInscripcion(new Date());
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ParticipacionCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -168,9 +200,28 @@ public class ParticipacionController implements Serializable {
     }
 
     public void buscarPersona() {
-        participante=participanteRNLocal.buscarParticipante(textoBusquedaDNI);
-        selected.setParticipante(participante);
-        PrimeFaces.current().ajax().update(":itNombre");
+        System.out.println("entro a buscar participante con dni= " + this.getTextoDNI());
+
+        if (!this.getTextoDNI().isEmpty()) {
+            Long dni = Long.parseLong(this.getTextoDNI());
+            System.out.println("DNI convertido a LONG dni= " + dni);
+            participante = participanteFacade.buscarParticipante(dni);
+            if (participante.getPersona() != null) {
+                selected.setParticipante(participante);
+                System.out.println("PARTICIPANTE: " + participante.getPersona().getNombre());
+
+            } else {
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.addMessage(null, new FacesMessage("Advertencia", "No se encontro la persona, de cargar en forma manual los datos"));
+                //PrimeFaces.current().ajax().update(":InscripcionCreateForm:itNombre");
+            }
+
+            //PrimeFaces.current().ajax().update(":InscripcionCreateForm:itNombre");
+            //FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add(":itNombre"); 
+        } else {
+            System.out.println(" entro if por el else: " + this.getTextoDNI());
+        }
+
     }
 
     private void persist(PersistAction persistAction, String successMessage) {

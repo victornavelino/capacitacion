@@ -9,6 +9,7 @@ import Entidades.capacitacion.Participante;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +29,16 @@ public class ParticipanteFacade extends AbstractFacade<Participante> {
     public ParticipanteFacade() {
         super(Participante.class);
     }
-    
+
+    public Participante buscarParticipante(Long dni) {
+        try {
+            Query q = em.createNamedQuery("Participante.buscarParticipante");
+            q.setParameter("dni", dni);
+            System.out.println("RN.ParticipanteRN.buscarParticipante(): " + q.getResultList());
+            return (Participante) q.getSingleResult();
+        } catch (Exception e) {
+            return new Participante();
+        }
+
+    }
 }

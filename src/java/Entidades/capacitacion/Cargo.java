@@ -64,7 +64,7 @@ public class Cargo implements Serializable {
 
     @Override
     public String toString() {
-        return "capacitacion.Cargo[ id=" + id + " ]";
+        return descripcion;
     }
     
 }

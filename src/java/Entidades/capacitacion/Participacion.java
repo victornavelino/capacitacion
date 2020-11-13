@@ -39,15 +39,11 @@ public class Participacion implements Serializable {
     private Capacitacion capacitacion;
     @OneToOne
     private Participante participante;
-    @OneToOne
-    private Cargo cargo;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date fechaInscripcion;
     private List<Date> fechaAsistencias;
     @OneToOne
     private Resultado resultado;
-    @OneToOne
-    private Area dependencia;
     @OneToOne
     private Certificado certificado;
     public Long getId() {
@@ -98,14 +94,6 @@ public class Participacion implements Serializable {
         this.resultado = resultado;
     }
 
-    public Area getDependencia() {
-        return dependencia;
-    }
-
-    public void setDependencia(Area dependencia) {
-        this.dependencia = dependencia;
-    }
-
     public Certificado getCertificado() {
         return certificado;
     }
@@ -113,15 +101,6 @@ public class Participacion implements Serializable {
     public void setCertificado(Certificado certificado) {
         this.certificado = certificado;
     }
-
-    public Cargo getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(Cargo cargo) {
-        this.cargo = cargo;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;

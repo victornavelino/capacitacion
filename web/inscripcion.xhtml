@@ -14,50 +14,68 @@
                     <div align="center" style="background-color: 0193CF">
                         <img src="#{request.contextPath}/Imagenes/logounca2.png" alt="" height="100px" style="background-color: #0193CF"/>
                     </div>
+                    <div align="justify">
+                               <p:outputLabel value="#{participacionController.selected.capacitacion.informacionAlPublico}" />    
+                   </div>
                     <p:panel id="pPri" header="Datos de la Inscripcion" >
                         <p:panelGrid columns="2" rendered="#{participacionController.selected != null}" styleClass="noBorders">
 
                             <p:outputLabel value="Capacitacion"/>
                             <p:outputLabel value="#{participacionController.selected.capacitacion.titulo}" />
-                            <p:outputLabel value="Buscar" for="iTextBuscarParticipante" />
+                            <p:outputLabel value="Buscar"/>
                             <h:panelGroup> 
-                                <p:inputText id="iTextBuscarParticipante" value="#{participacionController.textoBusquedaDNI}"  size="20" maxlength="8" placeholder="Ingrese su DNI"/>
-                                <p:commandButton id="btnBuscar" icon="ui-icon-search" actionListener="#{participacionController.buscarPersona()}"/>
+                                <p:inputText id="iTextBuscarParticipante" value="#{participacionController.textoDNI}"  size="20" maxlength="8" placeholder="Ingrese su DNI"/>
+                                <p:commandButton id="btnBuscar" icon="ui-icon-search" actionListener="#{participacionController.buscarPersona()}" update=":growl,InscripcionCreateForm:itNombre,InscripcionCreateForm:itApellido,InscripcionCreateForm:selectTipoDNI,InscripcionCreateForm:iTextDocumento"/>
                             </h:panelGroup>
-                            <p:outputLabel value="Nombre: " for="itNombre" />
+
+                            <p:outputLabel value="Nombre: "/>
                             <p:inputText id="itNombre" 
                                          value="#{participacionController.selected.participante.persona.nombre}"
                                          title="Nombre"
+                                         placeholder="Ingrese su Nombre"
                                          size="50"
                                          maxlength="100"
-                                         required="true"/>
-
-                            <p:outputLabel value="Apellido: " for="itApellido" />
+                                         required="true" requiredMessage="El Nombre es obligatario"/>
+                            <p:outputLabel value="Apellido: "/>
                             <p:inputText id="itApellido" 
                                          value="#{participacionController.selected.participante.persona.apellido}"
-                                         title="Nombre"
+                                         title="Apellido"
+                                         placeholder="Ingrese su Apellido"
                                          size="50"
                                          maxlength="100"
-                                         required="true"/>
+                                         required="true" requiredMessage="El Apellido es obligatario"/>
+                            <p:outputLabel value="Documento: "/>
+                            <h:panelGroup> 
+                                <p:selectOneMenu id="selectTipoDNI" value="#{participacionController.selected.participante.persona.documentoIdentidad.tipoDocumento}" filter="true" filterMatchMode="startsWith" required="true" requiredMessage="El Tipo de Documento es obligatario">
+                                    <f:selectItems value="#{tipoDocumentoController.itemsAvailableSelectOne}"
+                                                   var="tipoDocumentoItem"
+                                                   itemValue="#{tipoDocumentoItem}"/>
+                                </p:selectOneMenu>
+                                <p:inputText id="iTextDocumento" value="#{participacionController.selected.participante.persona.documentoIdentidad.numero}"  size="20" maxlength="8" placeholder="Ingrese su DNI" required="true" requiredMessage="El Numero de Documento es obligatorio"/>
 
-                            <p:outputLabel value="Tipo de Documento" for="tipoDocumento" />
-                            <p:selectOneMenu id="tipoDocumento" value="#{participacionController.tipoDocumento}" 
-                                             style="width: 150px" filter="true" filterMatchMode="startsWith">
-                                <f:selectItems value="#{tipoDocumentoController.itemsAvailableSelectOne}"
-                                               var="tipoDocumentoItem"
-                                               itemValue="#{tipoDocumentoItem}"/>
-                            </p:selectOneMenu>
+                            </h:panelGroup>
+                            <p:outputLabel value="Correo Electronico: "/>
+                             <p:inputText id="itEmail" 
+                                         value="#{participacionController.selected.participante.persona.correosElectronico.direccion}"
+                                         title="email"
+                                         placeholder="Ingrese su email"
+                                         size="50"
+                                         maxlength="100"
+                                        required="true" requiredMessage="El Email es obligatario">
+                            </p:inputText>
 
-                            <p:outputLabel value="Numero Documento" for="numero" />
-                            <p:inputText id="numero" value="#{participacionController.selected.participante.persona.documentoIdentidad.numero}" title="#{bundle.CreateDocumentoIdentidadTitle_numero}" required="true"/>
-
-                            <p:outputLabel value="#{bundle.CreateParticipacionLabel_dependencia}" for="dependencia" />
-                            <p:selectOneMenu id="dependencia" value="#{participacionController.selected.dependencia}" filter="true" filterMatchMode="startsWith" required="true">
+                            <p:outputLabel value="Dependencia" for="dependencia" />
+                            <p:selectOneMenu id="dependencia" value="#{participacionController.selected.participante.area}" filter="true" filterMatchMode="startsWith">
                                 <f:selectItems value="#{areaController.itemsAvailableSelectOne}"
                                                var="dependenciaItem"
                                                itemValue="#{dependenciaItem}"/>
                             </p:selectOneMenu>
-
+                            <p:outputLabel value="Cargo" for="cargo" />
+                            <p:selectOneMenu id="cargo" value="#{participacionController.selected.participante.cargo}" filter="true" filterMatchMode="startsWith">
+                                <f:selectItems value="#{cargoController.itemsAvailableSelectOne}"
+                                               var="dependenciaItem"
+                                               itemValue="#{dependenciaItem}"/>
+                            </p:selectOneMenu>
                         </p:panelGrid>
                     </p:panel>
                     <p:commandButton actionListener="#{participacionController.create}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'InscripcionCreateDialog');"/>
