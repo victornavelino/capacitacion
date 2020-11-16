@@ -6,9 +6,11 @@
 package Facades;
 
 import Entidades.capacitacion.Participacion;
+import Entidades.capacitacion.Participante;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,16 @@ public class ParticipacionFacade extends AbstractFacade<Participacion> {
     public ParticipacionFacade() {
         super(Participacion.class);
     }
-    
+
+    public Participacion buscarParticipacion(Participacion participacion) {
+        try {
+            Query q = em.createNamedQuery("Participacion.buscarParticipante");
+            q.setParameter("capacitacion", participacion.getCapacitacion());
+            q.setParameter("participante", participacion.getParticipante());
+            return (Participacion) q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
 }

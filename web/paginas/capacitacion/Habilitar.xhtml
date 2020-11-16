@@ -11,18 +11,18 @@
         <p:dialog id="HabilitacionEditDlg" widgetVar="HabilitacionEditDialog" modal="true" position="top" resizable="true" height="300" appendTo="@(body)" header="Habilitar Capacitacion">
             <h:form id="HabilitacionEditForm">
                 <h:panelGroup id="display">
-                    <p:panel id="pPri" header="Habilitar / Deshabilitar Capacitacion" >
+                    <p:panel id="pPri" header="Habilitar Capacitacion" >
                         <p:growl id="msg" showDetail="true" escape="false" />
                         <p:panelGrid columns="2" styleClass="noBorders">
 
                             <p:outputLabel value="Habilitar convocatoria" />
                             <p:selectBooleanCheckbox value="#{capacitacionController.selected.habilitada}" itemLabel="Habilitada"/>
                             <p:outputLabel for="aperturaDate" value="Apertura Inscripcion:" />
-                            <p:datePicker id="aperturaDate" value="#{capacitacionController.selected.apertura}" pattern="dd/MM/yyyy" />
+                            <p:datePicker id="aperturaDate" value="#{capacitacionController.selected.apertura}" pattern="dd/MM/yyyy" required="false"/>
                             <p:outputLabel for="cierreDate" value="Cierre Inscripcion:" />
-                            <p:datePicker id="cierreDate" value="#{capacitacionController.selected.cierre}" pattern="dd/MM/yyyy" />
+                            <p:datePicker id="cierreDate" value="#{capacitacionController.selected.cierre}" pattern="dd/MM/yyyy" required="false"/>
                         </p:panelGrid>
-                        <p:commandButton actionListener="#{capacitacionController.update}" value="#{bundle.Save}" update="display,:CapacitacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'HabilitacionEditDialog');"/>
+                        <p:commandButton actionListener="#{capacitacionController.modificarHabilitacion}" value="#{bundle.Save}" update="display,:CapacitacionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'HabilitacionEditDialog');"/>
                         <p:commandButton value="#{bundle.Cancel}" onclick="HabilitacionEditDialog.hide()"/>
                     </p:panel>
                 </h:panelGroup>

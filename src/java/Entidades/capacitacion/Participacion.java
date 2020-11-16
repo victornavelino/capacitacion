@@ -25,6 +25,7 @@ import javax.persistence.Temporal;
  */
 @NamedQueries({
     @NamedQuery(name = "Participacion.buscarParticipante", query = "SELECT p FROM Participacion p WHERE p.capacitacion=:capacitacion"),
+    @NamedQuery(name = "Participacion.buscarParticipacion", query = "SELECT p FROM Participacion p WHERE p.capacitacion=:capacitacion and p.participante=:participante"),
     })
 
 @Entity

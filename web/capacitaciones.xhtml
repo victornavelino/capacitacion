@@ -12,7 +12,7 @@
     <ui:define name="content">
         <h:form id="IncripcionListForm">
             <p:panel header="CAPACITACIONES ABIERTAS">
-                <p:dataTable id="datalist" value="#{capacitacionController.items}" var="item"
+                <p:dataTable id="datalist" value="#{capacitacionController.capacitacionesHabilitadas}" var="item"
                              selectionMode="single" selection="#{capacitacionController.selected}"
                              rowKey="#{item.id}"
                              >

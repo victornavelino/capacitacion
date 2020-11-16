@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -21,6 +23,10 @@ import javax.persistence.Temporal;
  *
  * @author hugo
  */
+
+@NamedQueries({
+    @NamedQuery(name = "Capacitacion.getHabilitadas", query = "SELECT c FROM Capacitacion c WHERE c.habilitada=True and :fechaHoy <= c.cierre"),
+    })
 @Entity
 @Table(name = "capacitacion")
 public class Capacitacion implements Serializable {

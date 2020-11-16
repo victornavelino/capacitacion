@@ -159,11 +159,18 @@ public class ParticipacionController implements Serializable {
     }
 
     public void create() {
-        selected.setFechaInscripcion(new Date());
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ParticipacionCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
-        }
+//        if (validarInscripcion()) {
+            selected.setFechaInscripcion(new Date());
+            persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ParticipacionCreated"));
+            if (!JsfUtil.isValidationFailed()) {
+                items = null;    // Invalidate list of items to trigger re-query.
+            }
+//            selected = null;
+//            participante = null;
+//        } else {
+//
+//        }
+
     }
 
     public void update() {
@@ -262,6 +269,15 @@ public class ParticipacionController implements Serializable {
 
     public List<Participacion> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+    }
+
+    private boolean validarInscripcion() {
+        if (getFacade().buscarParticipacion(selected) == null) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Error", "El Participante ya se encuentra inscripto"));
+            return false;
+        }
+        return true;
     }
 
     @FacesConverter(forClass = Participacion.class)

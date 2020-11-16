@@ -33,6 +33,7 @@ public class CapacitacionController implements Serializable {
     @EJB
     private Facades.CapacitacionFacade ejbFacade;
     private List<Capacitacion> items = null;
+    private List<Capacitacion> itemsHabilitados = null;
     private Capacitacion selected;
     private List<String> listaFechas;
     private List<String> listaAreas;
@@ -49,7 +50,6 @@ public class CapacitacionController implements Serializable {
     public void setBotonHabilitado(boolean botonHabilitado) {
         this.botonHabilitado = botonHabilitado;
     }
-
 
     public CapacitacionController() {
     }
@@ -80,6 +80,14 @@ public class CapacitacionController implements Serializable {
         return ejbFacade;
     }
 
+    public List<Capacitacion> getItemsHabilitados() {
+        return itemsHabilitados;
+    }
+
+    public void setItemsHabilitados(List<Capacitacion> itemsHabilitados) {
+        this.itemsHabilitados = itemsHabilitados;
+    }
+
     public Capacitacion prepareCreate() {
         selected = new Capacitacion();
         this.getPickListView().init();
@@ -87,7 +95,9 @@ public class CapacitacionController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-
+    public void prepararHabilitacion(Capacitacion capa){
+        selected=capa;
+    }
     public void create() {
         //asociamos los picklist cargados
         selected.setAreas(pickListView.getAreaDualListModel().getTarget());
@@ -104,6 +114,13 @@ public class CapacitacionController implements Serializable {
         selected.setAreas(pickListView.getAreaDualListModel().getTarget());
         selected.setDestinatarios(pickListView.getDestDualListModel().getTarget());
         selected.setDisertantes(pickListView.getDisertDualListModel().getTarget());
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("CapacitacionUpdated"));
+    }
+
+    public void modificarHabilitacion() {
+        //asociamos los datos de la habilitacion
+        System.err.println("Habilitada?: "+selected.getHabilitada());
+        //selected.setHabilitada(botonHabilitado);
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("CapacitacionUpdated"));
     }
 
@@ -244,17 +261,23 @@ public class CapacitacionController implements Serializable {
         }
         return this.listaString;
     }
-    
-    public String formatearFecha(Date fecha){
-       SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+
+    public String formatearFecha(Date fecha) {
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         try {
-         return formatoFecha.format(fecha);
+            return formatoFecha.format(fecha);
         } catch (Exception e) {
-         return "";
+            return "";
         }
     }
-    public void habilitarBoton(boolean estado){
+
+    public void habilitarBoton(boolean estado) {
         this.setBotonHabilitado(estado);
     }
 
+    public List<Capacitacion> getCapacitacionesHabilitadas() {
+
+        itemsHabilitados = getFacade().getHabilitadas();
+        return itemsHabilitados;
+    }
 }

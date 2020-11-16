@@ -86,7 +86,7 @@
                         <f:facet name="header">
                             <h:outputText value="Habilitar Capacitacion"/>
                         </f:facet>
-                        <p:commandButton id="habilitarButton"   icon="ui-icon-pencil" value="#{item.habilitada eq 'TRUE' ? 'Habilitada' : 'Deshabilitada'}" update=":HabilitacionEditForm" oncomplete="PF('HabilitacionEditDialog').show()" />
+                        <p:commandButton id="habilitarButton"   icon="ui-icon-pencil" value="#{item.habilitada eq 'TRUE' ? 'Habilitada' : 'Deshabilitada'}" actionListener="#{capacitacionController.prepararHabilitacion(item)}" update=":HabilitacionEditForm" oncomplete="PF('HabilitacionEditDialog').show()" />
                     </p:column>
                     <p:column>
                         <f:facet name="header">

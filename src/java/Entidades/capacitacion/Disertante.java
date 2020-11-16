@@ -71,7 +71,7 @@ public class Disertante implements Serializable {
 
     @Override
     public String toString() {
-        return "capacitacion.Disertante[ id=" + id + " ]";
+        return persona.toString();
     }
     
 }
