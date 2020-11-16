@@ -25,7 +25,7 @@
                             <p:outputLabel value="Buscar"/>
                             <h:panelGroup> 
                                 <p:inputText id="iTextBuscarParticipante" value="#{participacionController.textoDNI}"  size="20" maxlength="8" placeholder="Ingrese su DNI"/>
-                                <p:commandButton id="btnBuscar" icon="ui-icon-search" actionListener="#{participacionController.buscarPersona()}" update=":growl,InscripcionCreateForm:itNombre,InscripcionCreateForm:itApellido,InscripcionCreateForm:selectTipoDNI,InscripcionCreateForm:iTextDocumento"/>
+                                <p:commandButton id="btnBuscar" icon="ui-icon-search" actionListener="#{participacionController.buscarPersona()}" update=":growl,InscripcionCreateForm:itNombre,InscripcionCreateForm:itApellido,InscripcionCreateForm:selectTipoDNI,InscripcionCreateForm:iTextDocumento,InscripcionCreateForm:itEmail"/>
                             </h:panelGroup>
 
                             <p:outputLabel value="Nombre: "/>
@@ -78,7 +78,7 @@
                             </p:selectOneMenu>
                         </p:panelGrid>
                     </p:panel>
-                    <p:commandButton actionListener="#{participacionController.create}" value="#{bundle.Save}" update="display,:growl" oncomplete="handleSubmit(args,'InscripcionCreateDialog');"/>
+                    <p:commandButton actionListener="#{participacionController.create}" value="#{bundle.Save}" update=":growl"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="InscripcionCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

@@ -135,31 +135,13 @@ public class ParticipacionController implements Serializable {
     }
 
     public Participacion prepararIncripcion(Capacitacion capacitacion) {
-        textoBusquedaDNI = null;
-        textoDNI = "";
-        selected = new Participacion();
-        selected.setCapacitacion(capacitacion);
-        //this.tipoDocumento = new TipoDocumento();
-        documentoIdentidad = new DocumentoIdentidad();
-        correoElectronico = new CorreoElectronico();
-        correoElectronico.setDireccion(" ");
-        //documentoIdentidad.setTipoDocumento(tipoDocumento);
-        //documentoIdentidad.setNumero(0);
-
-        participante = new Participante();
-        persona = new Persona();
-        persona.setDocumentoIdentidad(documentoIdentidad);
-        persona.setCorreosElectronico(correoElectronico);
-        persona.setNombre(" ");
-        persona.setApellido(" ");
-        participante.setPersona(persona);
-        selected.setParticipante(participante);
+        limpiarCampos(capacitacion);
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-//        if (validarInscripcion()) {
+        if (validarInscripcion()) {
             selected.setFechaInscripcion(new Date());
             persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ParticipacionCreated"));
             if (!JsfUtil.isValidationFailed()) {
@@ -167,10 +149,11 @@ public class ParticipacionController implements Serializable {
             }
 //            selected = null;
 //            participante = null;
-//        } else {
-//
-//        }
+            PrimeFaces.current().executeScript("PF('InscripcionCreateDialog').hide()");
+            //PrimeFaces.current().dialog().closeDynamic("PF('InscripcionCreateDialog').hide()");
+            //RequestContext.getCurrentInstance().execute("PF('InscripcionCreateDialog').hide()");
 
+        }
     }
 
     public void update() {
@@ -221,6 +204,7 @@ public class ParticipacionController implements Serializable {
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage(null, new FacesMessage("Advertencia", "No se encontro la persona, de cargar en forma manual los datos"));
                 //PrimeFaces.current().ajax().update(":InscripcionCreateForm:itNombre");
+                limpiarCampos();
             }
 
             //PrimeFaces.current().ajax().update(":InscripcionCreateForm:itNombre");
@@ -272,12 +256,45 @@ public class ParticipacionController implements Serializable {
     }
 
     private boolean validarInscripcion() {
-        if (getFacade().buscarParticipacion(selected) == null) {
+        if (getFacade().buscarParticipacion(selected) != null) {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage("Error", "El Participante ya se encuentra inscripto"));
             return false;
         }
         return true;
+    }
+
+    private void limpiarCampos(Capacitacion capa) {
+        textoBusquedaDNI = null;
+        textoDNI = "";
+        selected = new Participacion();
+        selected.setCapacitacion(capa);
+        documentoIdentidad = new DocumentoIdentidad();
+        correoElectronico = new CorreoElectronico();
+        correoElectronico.setDireccion(" ");
+        participante = new Participante();
+        persona = new Persona();
+        persona.setDocumentoIdentidad(documentoIdentidad);
+        persona.setCorreosElectronico(correoElectronico);
+        persona.setNombre(" ");
+        persona.setApellido(" ");
+        participante.setPersona(persona);
+        selected.setParticipante(participante);
+    }
+    private void limpiarCampos(){
+        textoBusquedaDNI = null;
+        textoDNI = "";
+        documentoIdentidad = new DocumentoIdentidad();
+        correoElectronico = new CorreoElectronico();
+        correoElectronico.setDireccion(" ");
+        participante = new Participante();
+        persona = new Persona();
+        persona.setDocumentoIdentidad(documentoIdentidad);
+        persona.setCorreosElectronico(correoElectronico);
+        persona.setNombre(" ");
+        persona.setApellido(" ");
+        participante.setPersona(persona);
+        selected.setParticipante(participante);
     }
 
     @FacesConverter(forClass = Participacion.class)
