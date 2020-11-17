@@ -11,12 +11,12 @@
         <p:dialog id="InscripcionCreateDialog" widgetVar="InscripcionCreateDialog" modal="true" position="top" resizable="true" height="550" width="700" appendTo="@(body)" >
             <h:form id="InscripcionCreateForm">
                 <h:panelGroup id="display">
-                    <div align="center" style="background-color: 0193CF">
+                    <div align="center" style="background-color: #0193CF" >
                         <img src="#{request.contextPath}/Imagenes/logounca2.png" alt="" height="100px" style="background-color: #0193CF"/>
                     </div>
                     <div align="justify">
-                               <p:outputLabel value="#{participacionController.selected.capacitacion.informacionAlPublico}" />    
-                   </div>
+                        <p:outputLabel value="#{participacionController.selected.capacitacion.informacionAlPublico}" />    
+                    </div>
                     <p:panel id="pPri" header="Datos de la Inscripcion" >
                         <p:panelGrid columns="2" rendered="#{participacionController.selected != null}" styleClass="noBorders">
 
@@ -25,25 +25,26 @@
                             <p:outputLabel value="Buscar"/>
                             <h:panelGroup> 
                                 <p:inputText id="iTextBuscarParticipante" value="#{participacionController.textoDNI}"  size="20" maxlength="8" placeholder="Ingrese su DNI"/>
-                                <p:commandButton id="btnBuscar" icon="ui-icon-search" actionListener="#{participacionController.buscarPersona()}" update=":growl,InscripcionCreateForm:itNombre,InscripcionCreateForm:itApellido,InscripcionCreateForm:selectTipoDNI,InscripcionCreateForm:iTextDocumento,InscripcionCreateForm:itEmail"/>
+                                <p:commandButton id="btnBuscar" icon="ui-icon-search" actionListener="#{participacionController.buscarPersona}" process="@this,iTextBuscarParticipante"/>
+
                             </h:panelGroup>
 
                             <p:outputLabel value="Nombre: "/>
                             <p:inputText id="itNombre" 
                                          value="#{participacionController.selected.participante.persona.nombre}"
                                          title="Nombre"
-                                         placeholder="Ingrese su Nombre"
                                          size="50"
                                          maxlength="100"
-                                         required="true" requiredMessage="El Nombre es obligatario"/>
+                                         required="true" requiredMessage="El Nombre es obligatario"
+                                         placeholder="Ingrese su Nombre" />
                             <p:outputLabel value="Apellido: "/>
                             <p:inputText id="itApellido" 
                                          value="#{participacionController.selected.participante.persona.apellido}"
                                          title="Apellido"
-                                         placeholder="Ingrese su Apellido"
                                          size="50"
                                          maxlength="100"
-                                         required="true" requiredMessage="El Apellido es obligatario"/>
+                                         required="true" requiredMessage="El Apellido es obligatario"
+                                         placeholder="Ingrese su Apellido" />
                             <p:outputLabel value="Documento: "/>
                             <h:panelGroup> 
                                 <p:selectOneMenu id="selectTipoDNI" value="#{participacionController.selected.participante.persona.documentoIdentidad.tipoDocumento}" filter="true" filterMatchMode="startsWith" required="true" requiredMessage="El Tipo de Documento es obligatario">
@@ -51,17 +52,24 @@
                                                    var="tipoDocumentoItem"
                                                    itemValue="#{tipoDocumentoItem}"/>
                                 </p:selectOneMenu>
-                                <p:inputText id="iTextDocumento" value="#{participacionController.selected.participante.persona.documentoIdentidad.numero}"  size="20" maxlength="8" placeholder="Ingrese su DNI" required="true" requiredMessage="El Numero de Documento es obligatorio"/>
+                                <p:inputText id="iTextDocumento" value="#{participacionController.selected.participante.persona.documentoIdentidad.numero}"  
+                                             size="20" maxlength="8" 
+                                             placeholder="Ingrese su DNI" 
+                                             required="true" 
+                                             requiredMessage="El Numero de Documento es obligatorio"/>
 
                             </h:panelGroup>
                             <p:outputLabel value="Correo Electronico: "/>
-                             <p:inputText id="itEmail" 
-                                         value="#{participacionController.selected.participante.persona.correosElectronico.direccion}"
+                            <p:inputText id="itEmail" 
+                                         value="#{participacionController.selected.participante.persona.correosElectronico}"
                                          title="email"
-                                         placeholder="Ingrese su email"
                                          size="50"
                                          maxlength="100"
-                                        required="true" requiredMessage="El Email es obligatario">
+                                         placeholder="Ingrese su Email"
+                                         required="true" 
+                                         requiredMessage="El Email es obligatario"
+                                         validatorMessage="Formato de email invalido!">
+                                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                             </p:inputText>
 
                             <p:outputLabel value="Dependencia" for="dependencia" />

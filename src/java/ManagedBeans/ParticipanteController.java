@@ -1,7 +1,6 @@
 package ManagedBeans;
 
 import Entidades.capacitacion.Participante;
-import Entidades.persona.CorreoElectronico;
 import Entidades.persona.DocumentoIdentidad;
 import Entidades.persona.Domicilio;
 import Entidades.persona.Persona;
@@ -63,7 +62,6 @@ public class ParticipanteController implements Serializable {
         selected.setPersona(new Persona());
         selected.getPersona().setDocumentoIdentidad(new DocumentoIdentidad());
         selected.getPersona().getDocumentoIdentidad().setTipoDocumento(new TipoDocumento());
-        selected.getPersona().setCorreosElectronico(new CorreoElectronico());
         selected.getPersona().setTelefono(new Telefono());
         domicilioBean.setDomicilio(new Domicilio());
         initializeEmbeddableKey();

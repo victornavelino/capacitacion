@@ -75,24 +75,7 @@
                         </f:facet>
                         <h:outputText value="#{capacitacionController.convertirLista(item.disertantes)}"/>
                     </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="#{bundle.ListCapacitacionTitle_cantidadHoras}"/>
-                        </f:facet>
-                        <h:outputText value="#{item.cantidadHoras}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Habilitada Desde"/>
-                        </f:facet>
-                        <h:outputText value="#{capacitacionController.formatearFecha(item.apertura)}" />
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Habilitada Hasta"/>
-                        </f:facet>
-                        <h:outputText value="#{capacitacionController.formatearFecha(item.cierre)}" />
-                    </p:column>
+
 
                 </p:dataTable>
             </p:panel>

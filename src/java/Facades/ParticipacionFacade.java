@@ -33,7 +33,9 @@ public class ParticipacionFacade extends AbstractFacade<Participacion> {
 
     public Participacion buscarParticipacion(Participacion participacion) {
         try {
-            Query q = em.createNamedQuery("Participacion.buscarParticipante");
+            System.out.println("BUCAR PARTICIPACION CAPA: "+participacion.getCapacitacion());
+            System.out.println("BUCAR PARTICIPACION PARTICIPANTE: "+participacion.getParticipante());
+            Query q = em.createNamedQuery("Participacion.buscarParticipacion");
             q.setParameter("capacitacion", participacion.getCapacitacion());
             q.setParameter("participante", participacion.getParticipante());
             return (Participacion) q.getSingleResult();

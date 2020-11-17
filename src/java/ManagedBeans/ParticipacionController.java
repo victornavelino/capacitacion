@@ -3,9 +3,10 @@ package ManagedBeans;
 import Entidades.capacitacion.Capacitacion;
 import Entidades.capacitacion.Participacion;
 import Entidades.capacitacion.Participante;
-import Entidades.persona.CorreoElectronico;
 import Entidades.persona.DocumentoIdentidad;
+import Entidades.persona.Domicilio;
 import Entidades.persona.Persona;
+import Entidades.persona.Telefono;
 import Entidades.persona.TipoDocumento;
 import ManagedBeans.util.JsfUtil;
 import ManagedBeans.util.JsfUtil.PersistAction;
@@ -56,7 +57,8 @@ public class ParticipacionController implements Serializable {
     private DocumentoIdentidad documentoIdentidad;
     @EJB
     private ParticipanteFacade participanteFacade;
-    private CorreoElectronico correoElectronico;
+    @Inject
+    private DomicilioBean domicilioBean;
 
     public ParticipacionController() {
     }
@@ -135,24 +137,36 @@ public class ParticipacionController implements Serializable {
     }
 
     public Participacion prepararIncripcion(Capacitacion capacitacion) {
-        limpiarCampos(capacitacion);
+        //iniciamos participante
+        participante = new Participante();
+        participante.setPersona(new Persona());
+        participante.getPersona().setDocumentoIdentidad(new DocumentoIdentidad());
+        participante.getPersona().getDocumentoIdentidad().setTipoDocumento(new TipoDocumento());
+        participante.getPersona().setTelefono(new Telefono());
+        //Seteamos la participacion con la capacitacion seleccionada de la tabla
+        selected = new Participacion();
+        selected.setCapacitacion(capacitacion);
+        //seteamos el participante a la participaicon
+        selected.setParticipante(participante);
+
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        if (validarInscripcion()) {
+
+        if (getFacade().buscarParticipacion(selected) == null) {
             selected.setFechaInscripcion(new Date());
             persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ParticipacionCreated"));
             if (!JsfUtil.isValidationFailed()) {
                 items = null;    // Invalidate list of items to trigger re-query.
             }
-//            selected = null;
-//            participante = null;
+            // selected=null;           
             PrimeFaces.current().executeScript("PF('InscripcionCreateDialog').hide()");
-            //PrimeFaces.current().dialog().closeDynamic("PF('InscripcionCreateDialog').hide()");
-            //RequestContext.getCurrentInstance().execute("PF('InscripcionCreateDialog').hide()");
 
+        } else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Error", "El Participante ya se encuentra inscripto"));
         }
     }
 
@@ -190,6 +204,7 @@ public class ParticipacionController implements Serializable {
     }
 
     public void buscarPersona() {
+
         System.out.println("entro a buscar participante con dni= " + this.getTextoDNI());
 
         if (!this.getTextoDNI().isEmpty()) {
@@ -199,18 +214,24 @@ public class ParticipacionController implements Serializable {
             if (participante.getPersona() != null) {
                 selected.setParticipante(participante);
                 System.out.println("PARTICIPANTE: " + participante.getPersona().getNombre());
-
+                PrimeFaces.current().ajax().update("InscripcionCreateForm:itNombre");
+                PrimeFaces.current().ajax().update("InscripcionCreateForm:itApellido");
+                PrimeFaces.current().ajax().update("InscripcionCreateForm:selectTipoDNI");
+                PrimeFaces.current().ajax().update("InscripcionCreateForm:iTextDocumento");
+                PrimeFaces.current().ajax().update("InscripcionCreateForm:itEmail");
+                //PrimeFaces.current().ajax().update("InscripcionCreateForm:itNombre,InscripcionCreateForm:itApellido,InscripcionCreateForm:selectTipoDNI,InscripcionCreateForm:iTextDocumento,InscripcionCreateForm:itEmail");
             } else {
                 FacesContext context = FacesContext.getCurrentInstance();
                 context.addMessage(null, new FacesMessage("Advertencia", "No se encontro la persona, de cargar en forma manual los datos"));
-                //PrimeFaces.current().ajax().update(":InscripcionCreateForm:itNombre");
+                PrimeFaces.current().ajax().update("growl");
                 limpiarCampos();
             }
 
-            //PrimeFaces.current().ajax().update(":InscripcionCreateForm:itNombre");
-            //FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add(":itNombre"); 
         } else {
             System.out.println(" entro if por el else: " + this.getTextoDNI());
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage("Advertencia", "Ingrese su DNI, en caso de no obtener resultados, debe cargar de forma manual los datos"));
+            PrimeFaces.current().ajax().update("growl");
         }
 
     }
@@ -255,45 +276,12 @@ public class ParticipacionController implements Serializable {
         return getFacade().findAll();
     }
 
-    private boolean validarInscripcion() {
-        if (getFacade().buscarParticipacion(selected) != null) {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage("Error", "El Participante ya se encuentra inscripto"));
-            return false;
-        }
-        return true;
-    }
-
-    private void limpiarCampos(Capacitacion capa) {
-        textoBusquedaDNI = null;
-        textoDNI = "";
-        selected = new Participacion();
-        selected.setCapacitacion(capa);
-        documentoIdentidad = new DocumentoIdentidad();
-        correoElectronico = new CorreoElectronico();
-        correoElectronico.setDireccion(" ");
+    private void limpiarCampos() {
         participante = new Participante();
-        persona = new Persona();
-        persona.setDocumentoIdentidad(documentoIdentidad);
-        persona.setCorreosElectronico(correoElectronico);
-        persona.setNombre(" ");
-        persona.setApellido(" ");
-        participante.setPersona(persona);
-        selected.setParticipante(participante);
-    }
-    private void limpiarCampos(){
-        textoBusquedaDNI = null;
-        textoDNI = "";
-        documentoIdentidad = new DocumentoIdentidad();
-        correoElectronico = new CorreoElectronico();
-        correoElectronico.setDireccion(" ");
-        participante = new Participante();
-        persona = new Persona();
-        persona.setDocumentoIdentidad(documentoIdentidad);
-        persona.setCorreosElectronico(correoElectronico);
-        persona.setNombre(" ");
-        persona.setApellido(" ");
-        participante.setPersona(persona);
+        participante.setPersona(new Persona());
+        participante.getPersona().setDocumentoIdentidad(new DocumentoIdentidad());
+        participante.getPersona().getDocumentoIdentidad().setTipoDocumento(new TipoDocumento());
+        participante.getPersona().setTelefono(new Telefono());
         selected.setParticipante(participante);
     }
 

@@ -46,6 +46,18 @@
                         </f:facet>
                         <h:outputText value="#{item.persona.documentoIdentidad}"/>
                     </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Area"/>
+                        </f:facet>
+                        <h:outputText value="#{item.area}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cargo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.cargo}"/>
+                    </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{participanteController.prepareCreate}" update=":ParticipanteCreateForm" oncomplete="PF('ParticipanteCreateDialog').show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ParticipanteViewForm" oncomplete="PF('ParticipanteViewDialog').show()" disabled="#{empty participanteController.selected}"/>

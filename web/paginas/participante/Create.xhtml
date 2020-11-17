@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="ParticipanteCreateDlg" widgetVar="ParticipanteCreateDialog" modal="true" position="top" resizable="true" height="550" appendTo="@(body)" header="#{bundle.CreateParticipanteTitle}">
+        <p:dialog id="ParticipanteCreateDlg" widgetVar="ParticipanteCreateDialog" modal="true" position="top" resizable="true" height="550" appendTo="@(body)">
             <h:form id="ParticipanteCreateForm">
                 <h:panelGroup id="display">
                     <p:panel id="pPri" header="Datos del Participante" >
@@ -90,7 +90,7 @@
                             <p:inputText id="email" required="true" label="email" size="40"
                                          requiredMessage="Por favor ingrese un email valido."
                                          validatorMessage="Formato de email invalido!"
-                                         value="#{participanteController.selected.persona.correosElectronico.direccion}">
+                                         value="#{participanteController.selected.persona.correosElectronico}">
                                 <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                             </p:inputText>
 

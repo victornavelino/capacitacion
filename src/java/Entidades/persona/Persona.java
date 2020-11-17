@@ -46,8 +46,7 @@ public class Persona implements Serializable {
     private Domicilio domicilio;
     @OneToOne(cascade = CascadeType.ALL)
     private Telefono telefono;
-    @OneToOne(cascade = CascadeType.ALL)
-    private CorreoElectronico correosElectronico;
+    private String correosElectronico;
     private String cuit;
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
@@ -116,13 +115,14 @@ public class Persona implements Serializable {
         this.telefono = telefono;
     }
 
-    public CorreoElectronico getCorreosElectronico() {
+    public String getCorreosElectronico() {
         return correosElectronico;
     }
 
-    public void setCorreosElectronico(CorreoElectronico correosElectronico) {
+    public void setCorreosElectronico(String correosElectronico) {
         this.correosElectronico = correosElectronico;
     }
+
 
     public String getCuit() {
         return cuit;
