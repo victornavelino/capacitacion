@@ -46,7 +46,7 @@
                         <f:facet name="header">
                             <h:outputText value="Inscripcion"/>
                         </f:facet>
-                        <p:commandButton id="btnNuevaInscripcion" icon="ui-icon-plus" value="Inscribirse" actionListener="#{participacionController.prepararIncripcion(item)}" update=":InscripcionCreateForm" oncomplete="PF('InscripcionCreateDialog').show()"/>
+                        <p:commandButton id="btnNuevaInscripcion" icon="ui-icon-plus" value="Inscribirse" actionListener="#{participacionController.prepararIncripcion(item)}" update=":InscripcionCreateForm,growlMensaje" oncomplete="PF('InscripcionCreateDialog').show()"/>
                     </p:column>
 
 
