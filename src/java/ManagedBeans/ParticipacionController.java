@@ -150,9 +150,9 @@ public class ParticipacionController implements Serializable {
         selected.setParticipante(participante);
 
         initializeEmbeddableKey();
-//        FacesContext context = FacesContext.getCurrentInstance();
-//        context.addMessage(null, new FacesMessage("RECUERDE QUE LOS DATOS PROPORCIONADOS EN LA INSCRIPCION SON UTILIZADOS PARA LA CONFECCION DEL CERTIFICADO"));
-//        PrimeFaces.current().ajax().update("growlMensaje");
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Mensaje", "Recuerde que los datos proporcionados en la Inscripcion son utilizados para la confeccion del certificado"));
+        PrimeFaces.current().ajax().update("growlMensaje");
         return selected;
     }
 
