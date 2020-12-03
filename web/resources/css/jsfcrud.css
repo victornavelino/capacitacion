@@ -20,11 +20,12 @@
     border: none !important;
 }
 .Color-fondo{
-background: windowframe;
+    background: windowframe;
 }
 
 .ui-growl {
-    top: 50%;
     left: 50%;
-    position: absolute
+    right: 0;
+    margin-left:-150px;
+    z-index: 999999 !important;
 }
