@@ -225,7 +225,7 @@ public class ParticipacionController implements Serializable {
                 //PrimeFaces.current().ajax().update("InscripcionCreateForm:itNombre,InscripcionCreateForm:itApellido,InscripcionCreateForm:selectTipoDNI,InscripcionCreateForm:iTextDocumento,InscripcionCreateForm:itEmail");
             } else {
                 FacesContext context = FacesContext.getCurrentInstance();
-                context.addMessage(null, new FacesMessage("Advertencia", "No se encontro la persona, de cargar en forma manual los datos"));
+                context.addMessage(null, new FacesMessage("Advertencia", "No se encontro la persona, debe cargar en forma manual los datos"));
                 PrimeFaces.current().ajax().update("growl");
                 limpiarCampos();
             }

@@ -24,8 +24,5 @@
 }
 
 .ui-growl {
-    left: 50%;
-    right: 0;
-    margin-left:-150px;
     z-index: 999999 !important;
 }

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../../Templates/paginasTemplate.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:b="http://bootsfaces.net/ui"
+                >
+    <ui:define name="content">
 
-    <ui:composition template="/template.xhtml">
 
-
-        <ui:define name="title">
+        <h3>
             <h:outputText value="#{bundle.ListDisertanteTitle}"></h:outputText>
-        </ui:define>
-
-        <ui:define name="body">
-            <h:form id="DisertanteListForm">
+        </h3> 
+              <h:form id="DisertanteListForm">
                 <p:panel header="#{bundle.ListDisertanteTitle}">
                     <p:dataTable id="datalist" value="#{disertanteController.items}" var="item"
                                  selectionMode="single" selection="#{disertanteController.selected}"
@@ -52,7 +52,6 @@
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
-        </ui:define>
-    </ui:composition>
+    </ui:define>
+</ui:composition>
 
-</html>
