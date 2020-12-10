@@ -104,7 +104,7 @@
                     <f:facet name="footer">
                         <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{capacitacionController.prepareCreate}" update=":CapacitacionCreateForm" oncomplete="PF('CapacitacionCreateDialog').show()"/>
                         <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CapacitacionViewForm" oncomplete="PF('CapacitacionViewDialog').show()" disabled="#{empty capacitacionController.selected}"/>
-                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CapacitacionEditForm" oncomplete="PF('CapacitacionEditDialog').show()" disabled="#{empty capacitacionController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{pickListView.actualizar(capacitacionController.selected)}" update=":CapacitacionEditForm" oncomplete="PF('CapacitacionEditDialog').show()" disabled="#{empty capacitacionController.selected}"/>
                         <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{capacitacionController.destroy}" update=":growl,datalist" disabled="#{empty capacitacionController.selected}"/>
                     </f:facet>
                 </p:dataTable>

@@ -6,6 +6,7 @@
 package ManagedBeans;
 
 import Entidades.capacitacion.Area;
+import Entidades.capacitacion.Capacitacion;
 import Entidades.capacitacion.Destinatario;
 import Entidades.capacitacion.Disertante;
 import Facades.AreaFacade;
@@ -236,5 +237,26 @@ public class PickListView implements Serializable {
         target = new ArrayList<>();
         this.areaDualListModel = new DualListModel<>();
 
+    }
+
+    public void actualizar(Capacitacion capacitacion) {
+        //Areas
+        this.target = capacitacion.getAreas();
+        for(Area area: getAreaFacade().findAll()){
+            if(!capacitacion.getAreas().contains(area)){
+            this.source.add(area);
+        }
+        }
+          
+        //Destinatarios
+        this.sourceDest = getDestinatarioFacade().findAll();
+        this.targetDest = new ArrayList<>();
+        //Disertantes
+        this.sourceDisert = getDisertanteFacade().findAll();
+        this.targetDisert = new ArrayList<>();
+        //modelos
+        this.areaDualListModel = new DualListModel<>(this.source, this.target);
+        this.destDualListModel = new DualListModel<>(this.sourceDest, this.targetDest);
+        this.disertDualListModel = new DualListModel<>(this.sourceDisert, this.targetDisert);
     }
 }
