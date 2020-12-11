@@ -241,19 +241,31 @@ public class PickListView implements Serializable {
 
     public void actualizar(Capacitacion capacitacion) {
         //Areas
+        source = new ArrayList<>();
         this.target = capacitacion.getAreas();
-        for(Area area: getAreaFacade().findAll()){
-            if(!capacitacion.getAreas().contains(area)){
-            this.source.add(area);
+        for (Area area : getAreaFacade().findAll()) {
+            if (!capacitacion.getAreas().contains(area)) {
+                this.source.add(area);
+            }
         }
-        }
-          
+
         //Destinatarios
-        this.sourceDest = getDestinatarioFacade().findAll();
-        this.targetDest = new ArrayList<>();
+        sourceDest = new ArrayList<>();
+        this.targetDest = capacitacion.getDestinatarios();
+        for (Destinatario destinatario : getDestinatarioFacade().findAll()) {
+            if (!capacitacion.getDestinatarios().contains(destinatario)) {
+                this.sourceDest.add(destinatario);
+            }
+        }
         //Disertantes
-        this.sourceDisert = getDisertanteFacade().findAll();
-        this.targetDisert = new ArrayList<>();
+        sourceDisert = new ArrayList<>();
+        this.targetDisert = capacitacion.getDisertantes();
+        for (Disertante disertante : getDisertanteFacade().findAll()) {
+            if (!capacitacion.getDisertantes().contains(disertante)) {
+                this.sourceDisert.add(disertante);
+            }
+        }
+
         //modelos
         this.areaDualListModel = new DualListModel<>(this.source, this.target);
         this.destDualListModel = new DualListModel<>(this.sourceDest, this.targetDest);
